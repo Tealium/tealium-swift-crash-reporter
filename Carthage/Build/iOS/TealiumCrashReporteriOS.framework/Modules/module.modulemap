@@ -1,7 +1,0 @@
-framework module TealiumCrashReporteriOS {
-  umbrella header "CrashReporter.h"
-
-  export *
-  module * { export * }
-}
-
