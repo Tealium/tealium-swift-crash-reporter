@@ -45,11 +45,15 @@ public class TealiumCrashModule: Collector {
         self.config = config
         self.diskStorage = diskStorage ?? TealiumDiskStorage(config: config, forModule: "crash", isCritical: false)
         self.crashReporter = TealiumCrashReporter()
+        requestTrack()
+        completion((.success(true), nil))
+    }
+
+    func requestTrack() {
         if let data = crashReporter?.getData() {
             let trackRequest = TealiumTrackRequest(data: data)
             delegate?.requestTrack(trackRequest)
         }
-        completion((.success(true), nil))
     }
-
+    
 }

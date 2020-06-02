@@ -32,7 +32,7 @@ Pod::Spec.new do |s|
         # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
         crash.ios.source_files      = "TealiumCrashModule/TealiumCrashModule/*.{swift}"
         # ――― Dependencies ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-        crash.ios.dependency 'tealium-swift/Core'
+        crash.ios.dependency 'tealium-swift/Core', '~> 2.0.0'
         crash.ios.dependency "TealiumCrashReporter"
     end
 
