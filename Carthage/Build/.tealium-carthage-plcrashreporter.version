@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.4.0",
+  "iOS" : [
+    {
+      "name" : "TealiumCrashReporteriOS",
+      "hash" : "690f381f060d9d63bcf7336dbd4e8058a0c99b1c2e274d9a2d7712baf7fcd1e0"
+    }
+  ]
+}
