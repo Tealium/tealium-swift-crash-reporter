@@ -1,0 +1,26 @@
+PODS:
+  - Eureka (4.1.1)
+  - tealium-swift (1.8.0):
+    - tealium-swift/TealiumFull (= 1.8.0)
+  - tealium-swift/TealiumFull (1.8.0):
+    - TealiumCrashReporter
+  - TealiumCrashReporter (1.3.9)
+
+DEPENDENCIES:
+  - Eureka (~> 4.1.1)
+  - tealium-swift (= 1.8.0)
+
+SPEC REPOS:
+  trunk:
+    - Eureka
+    - tealium-swift
+    - TealiumCrashReporter
+
+SPEC CHECKSUMS:
+  Eureka: b88fb930e42c79f8c03c373d0fcdc28c1d6c50ed
+  tealium-swift: e8a1242ab822796622e5e280d9823d3a657807a3
+  TealiumCrashReporter: ba42dff0056e6ebba7e8ad781784934d37056f56
+
+PODFILE CHECKSUM: 200d5af0b25df8cc404182698727c803ce11efd0
+
+COCOAPODS: 1.9.1

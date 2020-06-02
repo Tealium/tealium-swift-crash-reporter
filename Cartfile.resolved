@@ -1,1 +1,2 @@
 binary "https://tags.tiqcdn.com/dle/tealiummobile/tealium-ios-carthage/tealium-carthage-plcrashreporter.json" "1.4.0"
+git "file:///Users/craigrouse/mobiledev/swift-library/tealium-swift-builder" "9148ed6e6256b8909c0750c44e9ea4f4464d6c40"

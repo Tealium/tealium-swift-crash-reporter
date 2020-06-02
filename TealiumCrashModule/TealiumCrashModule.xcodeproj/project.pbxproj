@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		D7B3AC47247EC2280040A0DE /* TealiumCrashModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7B3AC4F247EC6450040A0DE /* TealiumCore in Frameworks */ = {isa = PBXBuildFile; productRef = D7B3AC4E247EC6450040A0DE /* TealiumCore */; };
 		D7B3AC54247EC8340040A0DE /* TealiumCrashModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC50247EC8340040A0DE /* TealiumCrashModule.swift */; };
 		D7B3AC55247EC8340040A0DE /* TealiumCrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC51247EC8340040A0DE /* TealiumCrashReporter.swift */; };
 		D7B3AC56247EC8340040A0DE /* TealiumPLCrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC52247EC8340040A0DE /* TealiumPLCrash.swift */; };
@@ -47,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7B3AC4F247EC6450040A0DE /* TealiumCore in Frameworks */,
 				D7B3AC5A247EC8EA0040A0DE /* TealiumCrashReporteriOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,7 +114,6 @@
 			);
 			name = TealiumCrashModule;
 			packageProductDependencies = (
-				D7B3AC4E247EC6450040A0DE /* TealiumCore */,
 			);
 			productName = TealiumCrashModule;
 			productReference = D7B3AC42247EC2280040A0DE /* TealiumCrashModule.framework */;
@@ -147,7 +144,6 @@
 			);
 			mainGroup = D7B3AC38247EC2280040A0DE;
 			packageReferences = (
-				D7B3AC4D247EC6450040A0DE /* XCRemoteSwiftPackageReference "tealium-swift-builder" */,
 			);
 			productRefGroup = D7B3AC43247EC2280040A0DE /* Products */;
 			projectDirPath = "";
@@ -398,25 +394,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D7B3AC4D247EC6450040A0DE /* XCRemoteSwiftPackageReference "tealium-swift-builder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "file:///Users/craigrouse/mobiledev/swift-library/tealium-swift-builder";
-			requirement = {
-				branch = "remove-crash";
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D7B3AC4E247EC6450040A0DE /* TealiumCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D7B3AC4D247EC6450040A0DE /* XCRemoteSwiftPackageReference "tealium-swift-builder" */;
-			productName = TealiumCore;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D7B3AC39247EC2280040A0DE /* Project object */;
 }

@@ -1,0 +1,14 @@
+*.DS_Store*
+*.xcuserstate
+*.xcbkptlist
+tealium/tealium_debug/Swifter
+*.xcuserdatad*
+carthage/
+Carthage/
+*carthage/
+*Carthage/
+Cartfile.resolved
+.idea
+Pods/
+build/
+.swiftpm/*
