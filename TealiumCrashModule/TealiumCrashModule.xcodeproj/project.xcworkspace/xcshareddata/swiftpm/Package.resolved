@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "TealiumSwift",
+        "repositoryURL": "/Users/craigrouse/mobiledev/swift-library/tealium-swift-builder",
+        "state": {
+          "branch": "remove-crash",
+          "revision": "9148ed6e6256b8909c0750c44e9ea4f4464d6c40",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
