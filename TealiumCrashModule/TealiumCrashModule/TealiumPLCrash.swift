@@ -7,7 +7,9 @@
 //
 
 import Foundation
-#if !COCOAPODS
+#if COCOAPODS
+import TealiumSwift
+#else
 import TealiumCore
 #endif
 import TealiumCrashReporteriOS
