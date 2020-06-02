@@ -20,7 +20,7 @@ public class TealiumCrashModule: Collector {
     public var config: TealiumConfig
     
     public var data: [String: Any]? {
-        self.crashReporter?.getData()
+        return nil
     }
 
     /// Provided for unit testing￼.
@@ -42,6 +42,10 @@ public class TealiumCrashModule: Collector {
         self.config = config
         self.diskStorage = diskStorage ?? TealiumDiskStorage(config: config, forModule: "crash", isCritical: false)
         self.crashReporter = TealiumCrashReporter()
+        if let data = crashReporter?.getData() {
+            let trackRequest = TealiumTrackRequest(data: data)
+            delegate?.requestTrack(trackRequest)
+        }
         completion((.success(true), nil))
     }
 
