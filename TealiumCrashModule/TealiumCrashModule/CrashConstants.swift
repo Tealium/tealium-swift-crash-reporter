@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TealiumCrashKey {
+public enum CrashKey {
     public static let moduleName = "crash"
     public static let uuid = "crash_uuid"
     public static let processId = "crash_process_id"
@@ -34,27 +34,25 @@ public enum TealiumCrashKey {
     public static let codeType = "codeType"
     public static let architecture = "arch"
     public static let typeEncoding = "typeEncoding"
-    
-    enum ImageThread: String {
-        case baseAddress = "baseAddress"
-        case imageName = "imageName"
-        case imageUuid = "imageUuid"
-        case imageSize = "imageSize"
-        case codeType = "codeType"
-        case architecture = "arch"
-        case typeEncoding = "typeEncoding"
-        case registers = "registers"
-        case crashed = "crashed"
-        case threadId = "threadId"
-        case threadNumber = "threadNumber"
-        case priority = "priority"
-        case stack = "stack"
-        case instructionPointer = "instructionPointer"
-        case symbolInfo = "symbolInfo"
-        case symbolName = "symbolName"
-        case symbolStartAddress = "symbolStartAddr"
+
+    enum ImageThread {
+        static let baseAddress = "baseAddress"
+        static let imageName = "imageName"
+        static let imageUuid = "imageUuid"
+        static let imageSize = "imageSize"
+        static let codeType = "codeType"
+        static let architecture = "arch"
+        static let typeEncoding = "typeEncoding"
+        static let registers = "registers"
+        static let crashed = "crashed"
+        static let threadId = "threadId"
+        static let threadNumber = "threadNumber"
+        static let priority = "priority"
+        static let stack = "stack"
+        static let instructionPointer = "instructionPointer"
+        static let symbolInfo = "symbolInfo"
+        static let symbolName = "symbolName"
+        static let symbolStartAddress = "symbolStartAddr"
     }
-    
+
 }
-
-

@@ -1,5 +1,5 @@
 //
-//  TealiumCrashReporter.swift
+//  CrashReporter.swift
 //  TealiumCrash
 //
 //  Created by Jonathan Wong on 2/15/18.
@@ -25,14 +25,14 @@ public protocol CrashReporterProtocol: class {
 
     func purgePendingCrashReport()
 
-    func getData() -> [String: Any]?
+    var data: [String: Any]? { get }
 }
 
-public class TealiumCrashReporter: CrashReporterProtocol {
+public class CrashReporter: CrashReporterProtocol {
 
     var crashReporter = TEALPLCrashReporter()
     public var crashData: [String: Any]?
-    
+
     public init() {
         self.enable()
     }
@@ -68,20 +68,18 @@ public class TealiumCrashReporter: CrashReporterProtocol {
     /// Gets crash data if crash module is enabled.
     ///
     /// - Returns: `[String: Any]` containing crash information
-    public func getData() -> [String: Any]? {
-        do {
-            guard crashData == nil else {
-                return crashData
-            }
-            let crashReportData = crashReporter.loadPendingCrashReportData()
-            guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
-                return nil
-            }
-            let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: TealiumDeviceData())
-            var data = [String: Any]()
-            data += crash.getData(truncate: true)
-
-            return data
+    public var data: [String: Any]? {
+        guard crashData == nil else {
+            return crashData
         }
+        let crashReportData = crashReporter.loadPendingCrashReportData()
+        guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
+            return nil
+        }
+        let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData())
+        var data = [String: Any]()
+        data += crash.getData(truncate: true)
+
+        return data
     }
 }
