@@ -1,27 +1,25 @@
 //
-//  TealiumCrashModuleTests.swift
+//  CrashModuleTests.swift
 //  test-swift-tests-ios-crash
 //
 //  Created by Jonathan Wong on 2/12/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
-//import TealiumCore
 import TealiumCore
 @testable import TealiumCrashModule
 import XCTest
 
-class TealiumCrashModuleTests: XCTestCase {
+class CrashModuleTests: XCTestCase {
 
-    var crashModule: TealiumCrashModule!
+    var crashModule: CrashModule!
     var config: TealiumConfig!
     var mockCrashReporter: MockTealiumCrashReporter!
-    var crashExpectation: XCTestExpectation!
-    
+
     override func setUp() {
         super.setUp()
         config = TealiumConfig(account: "TestAccount", profile: "TestProfile", environment: "TestEnvironment")
-        crashModule = TealiumCrashModule(config: config, delegate: self, diskStorage: nil, completion: { _ in })
+        crashModule = CrashModule(config: config, delegate: self, diskStorage: nil, completion: { _ in })
         mockCrashReporter = MockTealiumCrashReporter()
     }
 
@@ -44,22 +42,24 @@ class TealiumCrashModuleTests: XCTestCase {
     }
 
     func testDataCallsGetDataMethod() {
-        crashExpectation = self.expectation(description: "crash track")
         crashModule.crashReporter = mockCrashReporter
         mockCrashReporter.pendingCrashReport = true
-        crashModule.requestTrack()
+        _ = crashModule.data
         XCTAssertEqual(1, mockCrashReporter.getDataCallCount)
-        wait(for: [crashExpectation], timeout: 0.5)
     }
 }
 
-extension TealiumCrashModuleTests: TealiumModuleDelegate {
-    func requestReleaseQueue(reason: String) {
-        
+extension CrashModuleTests: ModuleDelegate {
+    func processRemoteCommandRequest(_ request: TealiumRequest) {
+
     }
-    
+
     func requestTrack(_ track: TealiumTrackRequest) {
-        crashExpectation.fulfill()
+
+    }
+
+    func requestDequeue(reason: String) {
+
     }
 }
 
@@ -104,7 +104,7 @@ class MockTealiumCrashReporter: CrashReporterProtocol {
         pendingCrashReport = false
     }
 
-    func getData() -> [String: Any]? {
+    var data: [String: Any]? {
         getDataCallCount += 1
         return ["a": "1"]
     }
