@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.description  = <<-DESC
     Crash module for Tealium Swift v2.0.0+
     DESC
-    s.homepage     = "https://github.com/Tealium/tealium-swift-crash"
+    s.homepage     = "https://github.com/Tealium/tealium-swift-crash-reporter"
 
     # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.license      = { :type => "Commercial", :file => "LICENSE.txt" }
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "10.0"    
 
     # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash-reporter", :tag => "#{s.version}" }
 
     s.default_subspec = "Crash"
 
