@@ -210,8 +210,8 @@ public class TealiumPLCrash: AppDataCollection {
     /// Gets all crash-related variables.
     ///
     /// - Parameters:
-    /// - truncateLibraries: Bool indicating whether the libraries component of the report should be truncated
-    /// - truncateThreads: Bool indicating whether the threads component of the report should be truncated
+    ///   - truncateLibraries: Bool indicating whether the libraries component of the report should be truncated
+    ///   - truncateThreads: Bool indicating whether the threads component of the report should be truncated
     ///
     /// - Returns: [String: Any] containing all crash-related variables
     public func getData(truncateLibraries: Bool = false, truncateThreads: Bool = false) -> [String: Any] {
@@ -240,7 +240,7 @@ public class TealiumPLCrash: AppDataCollection {
     /// Gets all crash-related variables.
     ///
     /// - Parameters:
-    /// - truncate: Bool indicating whether the libraries and threads components of the report should be truncated
+    ///   - truncate: Bool indicating whether the libraries and threads components of the report should be truncated
     ///
     /// - Returns: [String: Any] containing all crash-related variables
     public func getData(truncate: Bool) -> [String: Any] {

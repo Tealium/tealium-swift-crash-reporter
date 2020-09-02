@@ -1,1 +1,6 @@
+*.DS_Store*
+*.xcuserstate
+*.xcuserdatad*
 Carthage/
+*Carthage/
+Cartfile.resolved
