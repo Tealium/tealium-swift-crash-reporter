@@ -84,7 +84,7 @@ public class TealiumPLCrash: AppDataCollection {
         }
 
         guard let appMemoryUsage = deviceMemoryUsage?[DeviceDataKey.appMemoryUsage] else {
-            return DeviceDataValue.unknown
+            return TealiumValue.unknown
         }
         return appMemoryUsage
     }
@@ -94,14 +94,14 @@ public class TealiumPLCrash: AppDataCollection {
             deviceMemoryUsage = deviceDataCollection.memoryUsage
         }
         guard let memoryAvailable = deviceMemoryUsage?[DeviceDataKey.memoryFree] else {
-            return DeviceDataValue.unknown
+            return TealiumValue.unknown
         }
         return memoryAvailable
     }
 
     var osBuild: String {
         let build = DeviceData.oSBuild
-        guard build != DeviceDataValue.unknown else {
+        guard build != TealiumValue.unknown else {
             if let crashReportBuild = crashReport.systemInfo.operatingSystemBuild {
                 return crashReportBuild
             }
@@ -113,7 +113,7 @@ public class TealiumPLCrash: AppDataCollection {
 
     func appBuild() -> String {
         guard let appBuild = build(bundle: bundle) else {
-            return DeviceDataValue.unknown
+            return TealiumValue.unknown
         }
         return appBuild
     }
