@@ -1,8 +1,7 @@
 //
 //  CrashReporter.swift
-//  TealiumCrash
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/15/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
@@ -12,7 +11,7 @@ import TealiumSwift
 #else
 import TealiumCore
 #endif
-import TealiumCrashReporteriOS
+import CrashReporter
 
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
 public protocol CrashReporterProtocol: class {
@@ -30,7 +29,7 @@ public protocol CrashReporterProtocol: class {
 
 public class CrashReporter: CrashReporterProtocol {
 
-    var crashReporter = TEALPLCrashReporter()
+    var crashReporter = PLCrashReporter()
     public var crashData: [String: Any]?
 
     public init() {
@@ -73,7 +72,7 @@ public class CrashReporter: CrashReporterProtocol {
             return crashData
         }
         let crashReportData = crashReporter.loadPendingCrashReportData()
-        guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
+        guard let crashReport = try? PLCrashReport(data: crashReportData) else {
             return nil
         }
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData())

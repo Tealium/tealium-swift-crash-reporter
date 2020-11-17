@@ -1,8 +1,7 @@
 //
 //  CrashModule.swift
-//  TealiumCrash
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/8/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 

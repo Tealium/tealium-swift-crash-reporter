@@ -1,17 +1,13 @@
 //
 //  TealiumCrashTests.swift
-//  tealium-swift-tests-ios
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/12/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
-//@testable import TealiumAppData
 import TealiumCore
 @testable import TealiumCrashModule
-@testable import TealiumCrashReporteriOS
-//@testable import DeviceData
-//@testable import TealiumVolatileData
+@testable import CrashReporter
 import XCTest
 
 class TealiumCrashTests: XCTestCase {
@@ -35,14 +31,14 @@ class TealiumCrashTests: XCTestCase {
     }
 
     func testCrashUuidNotNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
         XCTAssertNotNil(crash.uuid, "crash.uuid should not be nil")
     }
 
     func testCrashUuidsUnique() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash1 = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
         let crash2 = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
@@ -50,17 +46,17 @@ class TealiumCrashTests: XCTestCase {
     }
 
     func testMemoryUsageReturnsUnknownIfAppMemoryUsageIsNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
-        XCTAssertEqual(DeviceDataValue.unknown, crash.memoryUsage)
+        XCTAssertEqual(TealiumValue.unknown, crash.memoryUsage)
     }
 
     func testMemoryAvailableReturnsUnknownIfMemoryFreeIsNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
-        XCTAssertEqual(DeviceDataValue.unknown, crash.deviceMemoryAvailable)
+        XCTAssertEqual(TealiumValue.unknown, crash.deviceMemoryAvailable)
     }
 
     func testThreadsReturnsCrashedIfTruncated() {
@@ -68,7 +64,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "index_out_of_bounds", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
                 let result = crash.threads(truncate: true)
                 XCTAssertEqual(1, result.count)
@@ -83,7 +79,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "index_out_of_bounds", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
                 let result = crash.libraries(truncate: true)
                 XCTAssertEqual(1, result.count)
@@ -98,7 +94,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "live_report", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
                 let expectedKeys = [TealiumKey.event,
                                     CrashKey.uuid,

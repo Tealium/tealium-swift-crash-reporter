@@ -28,12 +28,15 @@ Pod::Spec.new do |s|
 
     s.default_subspec = "Crash"
 
+    # s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'arm64'}
+    # s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'arm64'}
+
     s.subspec "Crash" do |crash|
         # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
         crash.ios.source_files      = "TealiumCrashModule/TealiumCrashModule/*.{swift}"
         # ――― Dependencies ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
         crash.ios.dependency 'tealium-swift/Core'
-        crash.ios.dependency "TealiumCrashReporter"
+        crash.ios.dependency 'PLCrashReporter', '1.8'
     end
 
 end

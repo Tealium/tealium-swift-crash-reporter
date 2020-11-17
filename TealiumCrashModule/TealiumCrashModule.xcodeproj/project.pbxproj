@@ -7,21 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CFBDAA3325648D4E00BD3988 /* CrashReporter in Frameworks */ = {isa = PBXBuildFile; productRef = CFBDAA3225648D4E00BD3988 /* CrashReporter */; };
+		CFBDAA3725648D8B00BD3988 /* TealiumCore in Frameworks */ = {isa = PBXBuildFile; productRef = CFBDAA3625648D8B00BD3988 /* TealiumCore */; };
 		D7B3AC47247EC2280040A0DE /* TealiumCrashModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B3AC54247EC8340040A0DE /* CrashModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC50247EC8340040A0DE /* CrashModule.swift */; };
 		D7B3AC55247EC8340040A0DE /* CrashReporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC51247EC8340040A0DE /* CrashReporter.swift */; };
 		D7B3AC56247EC8340040A0DE /* TealiumPLCrash.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC52247EC8340040A0DE /* TealiumPLCrash.swift */; };
 		D7B3AC57247EC8340040A0DE /* CrashConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC53247EC8340040A0DE /* CrashConstants.swift */; };
 		D7B4B05824AE486800AB8701 /* CrashExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B4B05724AE486800AB8701 /* CrashExtensions.swift */; };
-		D7CDD25B248686F500CDAD23 /* TealiumCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CDD25A248686F500CDAD23 /* TealiumCore.framework */; };
-		D7CDD2912486DD5300CDAD23 /* TealiumCrashReporteriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CDD28F2486DD4900CDAD23 /* TealiumCrashReporteriOS.framework */; };
-		D7CDD2922486DD5300CDAD23 /* TealiumCrashReporteriOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D7CDD28F2486DD4900CDAD23 /* TealiumCrashReporteriOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D7CDD2B62486E0F800CDAD23 /* TealiumCrashModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7B3AC42247EC2280040A0DE /* TealiumCrashModule.framework */; platformFilter = ios; };
 		D7CDD2BD2486E10A00CDAD23 /* TealiumCrashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CDD2AC2486E0DF00CDAD23 /* TealiumCrashTests.swift */; };
 		D7CDD2BE2486E13E00CDAD23 /* live_report.plcrash in Resources */ = {isa = PBXBuildFile; fileRef = D7CDD2A82486E0DF00CDAD23 /* live_report.plcrash */; };
 		D7CDD2BF2486E14000CDAD23 /* enumerate_objects.plcrash in Resources */ = {isa = PBXBuildFile; fileRef = D7CDD2A92486E0DF00CDAD23 /* enumerate_objects.plcrash */; };
 		D7CDD2C02486E14100CDAD23 /* index_out_of_bounds.plcrash in Resources */ = {isa = PBXBuildFile; fileRef = D7CDD2AA2486E0DF00CDAD23 /* index_out_of_bounds.plcrash */; };
-		D7CDD2C22486E17200CDAD23 /* TealiumCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7CDD25A248686F500CDAD23 /* TealiumCore.framework */; platformFilter = ios; };
 		D7CDD2C32486E26F00CDAD23 /* TealiumCrashModuleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CDD2AB2486E0DF00CDAD23 /* TealiumCrashModuleTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +40,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D7CDD2922486DD5300CDAD23 /* TealiumCrashReporteriOS.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,8 +55,6 @@
 		D7B3AC52247EC8340040A0DE /* TealiumPLCrash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TealiumPLCrash.swift; sourceTree = "<group>"; };
 		D7B3AC53247EC8340040A0DE /* CrashConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashConstants.swift; sourceTree = "<group>"; };
 		D7B4B05724AE486800AB8701 /* CrashExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashExtensions.swift; sourceTree = "<group>"; };
-		D7CDD25A248686F500CDAD23 /* TealiumCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TealiumCore.framework; path = ../../Carthage/Build/iOS/TealiumCore.framework; sourceTree = "<group>"; };
-		D7CDD28F2486DD4900CDAD23 /* TealiumCrashReporteriOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TealiumCrashReporteriOS.framework; path = ../../Carthage/Build/iOS/TealiumCrashReporteriOS.framework; sourceTree = "<group>"; };
 		D7CDD2A82486E0DF00CDAD23 /* live_report.plcrash */ = {isa = PBXFileReference; lastKnownFileType = file; path = live_report.plcrash; sourceTree = "<group>"; };
 		D7CDD2A92486E0DF00CDAD23 /* enumerate_objects.plcrash */ = {isa = PBXFileReference; lastKnownFileType = file; path = enumerate_objects.plcrash; sourceTree = "<group>"; };
 		D7CDD2AA2486E0DF00CDAD23 /* index_out_of_bounds.plcrash */ = {isa = PBXFileReference; lastKnownFileType = file; path = index_out_of_bounds.plcrash; sourceTree = "<group>"; };
@@ -74,8 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D7CDD25B248686F500CDAD23 /* TealiumCore.framework in Frameworks */,
-				D7CDD2912486DD5300CDAD23 /* TealiumCrashReporteriOS.framework in Frameworks */,
+				CFBDAA3325648D4E00BD3988 /* CrashReporter in Frameworks */,
+				CFBDAA3725648D8B00BD3988 /* TealiumCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,7 +79,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D7CDD2B62486E0F800CDAD23 /* TealiumCrashModule.framework in Frameworks */,
-				D7CDD2C22486E17200CDAD23 /* TealiumCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,8 +107,6 @@
 		D7B3AC44247EC2280040A0DE /* TealiumCrashModule */ = {
 			isa = PBXGroup;
 			children = (
-				D7CDD28F2486DD4900CDAD23 /* TealiumCrashReporteriOS.framework */,
-				D7CDD25A248686F500CDAD23 /* TealiumCore.framework */,
 				D7B3AC53247EC8340040A0DE /* CrashConstants.swift */,
 				D7B4B05724AE486800AB8701 /* CrashExtensions.swift */,
 				D7B3AC50247EC8340040A0DE /* CrashModule.swift */,
@@ -180,7 +172,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D7B3AC4A247EC2280040A0DE /* Build configuration list for PBXNativeTarget "TealiumCrashModule" */;
 			buildPhases = (
-				D7B3AC5D247EC99A0040A0DE /* ShellScript */,
 				D7B3AC3D247EC2280040A0DE /* Headers */,
 				D7B3AC3E247EC2280040A0DE /* Sources */,
 				D7B3AC3F247EC2280040A0DE /* Frameworks */,
@@ -193,6 +184,8 @@
 			);
 			name = TealiumCrashModule;
 			packageProductDependencies = (
+				CFBDAA3225648D4E00BD3988 /* CrashReporter */,
+				CFBDAA3625648D8B00BD3988 /* TealiumCore */,
 			);
 			productName = TealiumCrashModule;
 			productReference = D7B3AC42247EC2280040A0DE /* TealiumCrashModule.framework */;
@@ -205,7 +198,6 @@
 				D7CDD2AD2486E0F800CDAD23 /* Sources */,
 				D7CDD2AE2486E0F800CDAD23 /* Frameworks */,
 				D7CDD2AF2486E0F800CDAD23 /* Resources */,
-				D7CDD2C42486E2AF00CDAD23 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -213,6 +205,8 @@
 				D7CDD2B82486E0F800CDAD23 /* PBXTargetDependency */,
 			);
 			name = TealiumCrashModuleTests;
+			packageProductDependencies = (
+			);
 			productName = TealiumCrashModuleTests;
 			productReference = D7CDD2B12486E0F800CDAD23 /* TealiumCrashModuleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -246,6 +240,8 @@
 			);
 			mainGroup = D7B3AC38247EC2280040A0DE;
 			packageReferences = (
+				CFBDAA3125648D4E00BD3988 /* XCRemoteSwiftPackageReference "plcrashreporter" */,
+				CFBDAA3525648D8B00BD3988 /* XCRemoteSwiftPackageReference "tealium-swift" */,
 			);
 			productRefGroup = D7B3AC43247EC2280040A0DE /* Products */;
 			projectDirPath = "";
@@ -276,45 +272,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D7B3AC5D247EC99A0040A0DE /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# cd \"$PROJECT_DIR\"/../ && carthage update --platform ios --cache-builds\n";
-		};
-		D7CDD2C42486E2AF00CDAD23 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/../Carthage/Build/iOS/TealiumCrashReporteriOS.framework",
-				"$(SRCROOT)/../Carthage/Build/iOS/TealiumCore.framework",
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D7B3AC3E247EC2280040A0DE /* Sources */ = {
@@ -478,7 +435,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TealiumCrashModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -508,7 +465,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TealiumCrashModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -532,7 +489,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XC939GDC9P;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TealiumCrashModuleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -552,7 +509,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XC939GDC9P;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../Carthage/Build/iOS";
+				FRAMEWORK_SEARCH_PATHS = "";
 				INFOPLIST_FILE = TealiumCrashModuleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -598,6 +555,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CFBDAA3125648D4E00BD3988 /* XCRemoteSwiftPackageReference "plcrashreporter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/plcrashreporter";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.1;
+			};
+		};
+		CFBDAA3525648D8B00BD3988 /* XCRemoteSwiftPackageReference "tealium-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tealium/tealium-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CFBDAA3225648D4E00BD3988 /* CrashReporter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFBDAA3125648D4E00BD3988 /* XCRemoteSwiftPackageReference "plcrashreporter" */;
+			productName = CrashReporter;
+		};
+		CFBDAA3625648D8B00BD3988 /* TealiumCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CFBDAA3525648D8B00BD3988 /* XCRemoteSwiftPackageReference "tealium-swift" */;
+			productName = TealiumCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D7B3AC39247EC2280040A0DE /* Project object */;
 }

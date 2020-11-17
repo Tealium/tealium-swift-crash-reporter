@@ -1,8 +1,7 @@
 //
 //  CrashModuleTests.swift
-//  test-swift-tests-ios-crash
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/12/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
@@ -13,19 +12,21 @@ import XCTest
 class CrashModuleTests: XCTestCase {
 
     var crashModule: CrashModule!
-    var config: TealiumConfig!
+    var context: TealiumContext!
     var mockCrashReporter: MockTealiumCrashReporter!
-
+    
     override func setUp() {
         super.setUp()
-        config = TealiumConfig(account: "TestAccount", profile: "TestProfile", environment: "TestEnvironment")
-        crashModule = CrashModule(config: config, delegate: self, diskStorage: nil, completion: { _ in })
+        let config = TealiumConfig(account: "TestAccount", profile: "TestProfile", environment: "TestEnvironment")
+        let tealium = Tealium(config: config)
+        context = TealiumContext(config: config, dataLayer: MockDataLayer(), tealium: tealium)
+        crashModule = CrashModule(context: context, delegate: self, diskStorage: nil, completion: { _ in })
         mockCrashReporter = MockTealiumCrashReporter()
     }
 
     override func tearDown() {
         crashModule = nil
-        config = nil
+        context = nil
         super.tearDown()
     }
 
@@ -108,4 +109,27 @@ class MockTealiumCrashReporter: CrashReporterProtocol {
         getDataCallCount += 1
         return ["a": "1"]
     }
+}
+
+class MockDataLayer: DataLayerManagerProtocol {
+    
+    var all = [String : Any]()
+    var allSessionData = [String : Any]()
+    var sessionId: String?
+    var sessionData = [String : Any]()
+    
+    func add(data: [String : Any], expiry: Expiry?) { }
+    
+    func add(key: String, value: Any, expiry: Expiry?) { }
+    
+    func joinTrace(id: String) { }
+    
+    func leaveTrace() { }
+    
+    func delete(for keys: [String]) { }
+    
+    func delete(for key: String) { }
+    
+    func deleteAll() { }
+    
 }
