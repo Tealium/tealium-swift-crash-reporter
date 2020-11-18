@@ -24,12 +24,10 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "10.0"    
 
     # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash-reporter", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash-reporter.git", :tag => "#{s.version}" }
 
     s.default_subspec = "Crash"
-
-    # s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'arm64'}
-    # s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', 'EXCLUDED_ARCHS[sdk=iphoneos*]' => 'arm64'}
+    s.static_framework = true
 
     s.subspec "Crash" do |crash|
         # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
