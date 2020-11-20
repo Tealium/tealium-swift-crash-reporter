@@ -13,6 +13,8 @@ import TealiumCore
 #endif
 import CrashReporter
 
+// TODO: Try using xcframework and/or updating the targets
+
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
 public protocol CrashReporterProtocol: class {
     @discardableResult
@@ -29,7 +31,7 @@ public protocol CrashReporterProtocol: class {
 
 public class CrashReporter: CrashReporterProtocol {
 
-    var crashReporter = PLCrashReporter()
+    var crashReporter = TEALPLCrashReporter()
     public var crashData: [String: Any]?
 
     public init() {
@@ -72,7 +74,7 @@ public class CrashReporter: CrashReporterProtocol {
             return crashData
         }
         let crashReportData = crashReporter.loadPendingCrashReportData()
-        guard let crashReport = try? PLCrashReport(data: crashReportData) else {
+        guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
             return nil
         }
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData())

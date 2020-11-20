@@ -19,7 +19,7 @@ public class TealiumPLCrash: AppDataCollection {
     static let CrashDataUnknown = "unknown"
     static let CrashEvent = "crash"
 
-    let crashReport: PLCrashReport
+    let crashReport: TEALPLCrashReport
     let deviceDataCollection: DeviceDataCollection
     private let bundle = Bundle.main
 
@@ -34,10 +34,10 @@ public class TealiumPLCrash: AppDataCollection {
     var signalCode: String?
     var signalName: String?
     var signalAddress: String?
-    var threadInfos: [PLCrashReportThreadInfo]?
-    var images: [PLCrashReportBinaryImageInfo]?
+    var threadInfos: [TEALPLCrashReportThreadInfo]?
+    var images: [TEALPLCrashReportBinaryImageInfo]?
 
-    init(crashReport: PLCrashReport, deviceDataCollection: DeviceDataCollection) {
+    init(crashReport: TEALPLCrashReport, deviceDataCollection: DeviceDataCollection) {
         self.crashReport = crashReport
         self.deviceDataCollection = deviceDataCollection
         self.uuid = UUID().uuidString
@@ -68,12 +68,12 @@ public class TealiumPLCrash: AppDataCollection {
             self.signalAddress = String(signalInfo.address)
         }
 
-        if let images = crashReport.images, crashReport.images as? [PLCrashReportBinaryImageInfo] != nil {
-            self.images = images as? [PLCrashReportBinaryImageInfo]
+        if let images = crashReport.images, crashReport.images as? [TEALPLCrashReportBinaryImageInfo] != nil {
+            self.images = images as? [TEALPLCrashReportBinaryImageInfo]
         }
 
         if let threads = crashReport.threads, !crashReport.threads.isEmpty {
-            self.threadInfos = threads as? [PLCrashReportThreadInfo]
+            self.threadInfos = threads as? [TEALPLCrashReportThreadInfo]
         }
     }
 
@@ -140,7 +140,7 @@ public class TealiumPLCrash: AppDataCollection {
         for thread in threadInfos {
             var registerDictionary = [String: Any]()
             if let registers = thread.registers, !thread.registers.isEmpty {
-                for case let register as PLCrashReportRegisterInfo in registers {
+                for case let register as TEALPLCrashReportRegisterInfo in registers {
                     registerDictionary[register.registerName] = String(format: "0x%02x", register.registerValue)
                 }
             }
@@ -152,7 +152,7 @@ public class TealiumPLCrash: AppDataCollection {
             var stackArray = [[String: Any]]()
             var stackDictionary = [String: Any]()
             if let stackFrames = thread.stackFrames, !thread.stackFrames.isEmpty {
-                for case let stack as PLCrashReportStackFrameInfo in stackFrames {
+                for case let stack as TEALPLCrashReportStackFrameInfo in stackFrames {
                     stackDictionary[CrashKey.ImageThread.instructionPointer] = stack.instructionPointer
                     var symbolDictionary = [String: Any]()
                     if let symbolInfo = stack.symbolInfo {
