@@ -13,8 +13,6 @@ import TealiumCore
 #endif
 import CrashReporter
 
-// TODO: Try using xcframework and/or updating the targets
-
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
 public protocol CrashReporterProtocol: class {
     @discardableResult

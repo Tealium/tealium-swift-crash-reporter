@@ -16,7 +16,7 @@ let package = Package(
     targets: [
         .target(
             name: "TealiumCrashModule",
-            dependencies: ["TealiumCrashReporteriOS", "TealiumCore"],
+            dependencies: ["TealiumCrashReporter", "TealiumCore"],
             path: "./TealiumCrashModule/TealiumCrashModule"),
         .testTarget(
             name: "TealiumCrashModuleTests",

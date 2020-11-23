@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CF5818932568849600B8938A /* TealiumCrashReporteriOS in Frameworks */ = {isa = PBXBuildFile; productRef = CF5818922568849600B8938A /* TealiumCrashReporteriOS */; };
+		CF234D17256C30A400CB300C /* TealiumCrashReporter in Frameworks */ = {isa = PBXBuildFile; productRef = CF234D16256C30A400CB300C /* TealiumCrashReporter */; };
 		CF59C98A2565D77E009C5571 /* TealiumCore in Frameworks */ = {isa = PBXBuildFile; productRef = CF59C9892565D77E009C5571 /* TealiumCore */; };
 		D7B3AC47247EC2280040A0DE /* TealiumCrashModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B3AC54247EC8340040A0DE /* CrashModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC50247EC8340040A0DE /* CrashModule.swift */; };
@@ -70,7 +70,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF59C98A2565D77E009C5571 /* TealiumCore in Frameworks */,
-				CF5818932568849600B8938A /* TealiumCrashReporteriOS in Frameworks */,
+				CF234D17256C30A400CB300C /* TealiumCrashReporter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +185,7 @@
 			name = TealiumCrashModule;
 			packageProductDependencies = (
 				CF59C9892565D77E009C5571 /* TealiumCore */,
-				CF5818922568849600B8938A /* TealiumCrashReporteriOS */,
+				CF234D16256C30A400CB300C /* TealiumCrashReporter */,
 			);
 			productName = TealiumCrashModule;
 			productReference = D7B3AC42247EC2280040A0DE /* TealiumCrashModule.framework */;
@@ -241,7 +241,7 @@
 			mainGroup = D7B3AC38247EC2280040A0DE;
 			packageReferences = (
 				CFBDAA3525648D8B00BD3988 /* XCRemoteSwiftPackageReference "tealium-swift" */,
-				CF5818912568849600B8938A /* XCRemoteSwiftPackageReference "plcrash-test" */,
+				CF234D15256C30A400CB300C /* XCRemoteSwiftPackageReference "plcrash-test" */,
 			);
 			productRefGroup = D7B3AC43247EC2280040A0DE /* Products */;
 			projectDirPath = "";
@@ -559,7 +559,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CF5818912568849600B8938A /* XCRemoteSwiftPackageReference "plcrash-test" */ = {
+		CF234D15256C30A400CB300C /* XCRemoteSwiftPackageReference "plcrash-test" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/christinasund/plcrash-test";
 			requirement = {
@@ -578,10 +578,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CF5818922568849600B8938A /* TealiumCrashReporteriOS */ = {
+		CF234D16256C30A400CB300C /* TealiumCrashReporter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CF5818912568849600B8938A /* XCRemoteSwiftPackageReference "plcrash-test" */;
-			productName = TealiumCrashReporteriOS;
+			package = CF234D15256C30A400CB300C /* XCRemoteSwiftPackageReference "plcrash-test" */;
+			productName = TealiumCrashReporter;
 		};
 		CF59C9892565D77E009C5571 /* TealiumCore */ = {
 			isa = XCSwiftPackageProductDependency;
