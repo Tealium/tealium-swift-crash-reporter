@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "TealiumCrashReporter",
+        "repositoryURL": "https://github.com/christinasund/plcrash-test",
+        "state": {
+          "branch": null,
+          "revision": "82104fd8627b478b27904174faffc187cf77c7da",
+          "version": "1.6.7"
+        }
+      },
+      {
+        "package": "TealiumSwift",
+        "repositoryURL": "https://github.com/tealium/tealium-swift",
+        "state": {
+          "branch": null,
+          "revision": "4c807fa348bd18844a4dd12ced16a4480e41b8a1",
+          "version": "2.1.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
