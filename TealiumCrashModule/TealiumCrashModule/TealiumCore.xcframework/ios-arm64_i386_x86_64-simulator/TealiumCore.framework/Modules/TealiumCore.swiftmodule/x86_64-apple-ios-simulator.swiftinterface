@@ -1,0 +1,1496 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TealiumCore
+import CoreTelephony
+import Darwin
+import Foundation
+import Network
+import Swift
+import SystemConfiguration
+import UIKit
+import os.log
+import os
+import zlib
+public protocol Storable {
+  func object(forKey defaultName: Swift.String) -> Any?
+  func removeObject(forKey defaultName: Swift.String)
+}
+extension UserDefaults : TealiumCore.Storable {
+}
+public protocol Unarchivable {
+  func setClass(_ cls: Swift.AnyClass?, forClassName codedName: Swift.String)
+  static func unarchiveTopLevelObjectWithData(_ data: Foundation.Data) throws -> Any?
+}
+extension NSKeyedUnarchiver : TealiumCore.Unarchivable {
+}
+extension Disk {
+  public static func url(for path: Swift.String?, in directory: TealiumCore.Disk.Directory) throws -> Foundation.URL
+  public static func clear(_ directory: TealiumCore.Disk.Directory) throws
+  public static func remove(_ path: Swift.String, from directory: TealiumCore.Disk.Directory) throws
+  public static func remove(_ url: Foundation.URL) throws
+  public static func exists(_ path: Swift.String, in directory: TealiumCore.Disk.Directory) -> Swift.Bool
+  public static func exists(_ url: Foundation.URL) -> Swift.Bool
+  public static func doNotBackup(_ path: Swift.String, in directory: TealiumCore.Disk.Directory) throws
+  public static func doNotBackup(_ url: Foundation.URL) throws
+  public static func backup(_ path: Swift.String, in directory: TealiumCore.Disk.Directory) throws
+  public static func backup(_ url: Foundation.URL) throws
+  public static func move(_ path: Swift.String, in directory: TealiumCore.Disk.Directory, to newDirectory: TealiumCore.Disk.Directory) throws
+  public static func move(_ originalURL: Foundation.URL, to newURL: Foundation.URL) throws
+  public static func rename(_ path: Swift.String, in directory: TealiumCore.Disk.Directory, to newPath: Swift.String) throws
+  public static func isFolder(_ url: Foundation.URL) -> Swift.Bool
+}
+extension DataLayer {
+  public var numberOfTracks: Swift.Int {
+    get
+    set
+  }
+  public var sessionId: Swift.String? {
+    get
+    set
+  }
+  public func refreshSessionData()
+  public func refreshSession()
+  public func startNewSession(with sessionStarter: TealiumCore.SessionStarterProtocol)
+}
+public struct DiskError : Swift.Error {
+}
+extension TealiumConfig {
+  public var memoryReportingEnabled: Swift.Bool {
+    get
+    set
+  }
+}
+extension Collectors {
+  public static let Device: TealiumCore.DeviceDataModule.Type
+}
+extension Double {
+  public var milliseconds: Swift.Int64 {
+    get
+  }
+}
+public class TealiumDiskStorage : TealiumCore.TealiumDiskStorageProtocol {
+  public init(config: TealiumCore.TealiumConfig, forModule module: Swift.String, isCritical: Swift.Bool = false)
+  public func canWrite<T>(data: T) -> Swift.Bool where T : Swift.Encodable
+  public func canWrite() -> Swift.Bool
+  public func totalSizeSavedData() -> Swift.String?
+  public func save(_ data: TealiumCore.AnyCodable, completion: TealiumCore.TealiumCompletion?)
+  public func save(_ data: TealiumCore.AnyCodable, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?)
+  public func save<T>(_ data: T, completion: TealiumCore.TealiumCompletion?) where T : Swift.Encodable
+  public func save<T>(_ data: T, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?) where T : Swift.Encodable
+  public func append<T>(_ data: T, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  public func append<T>(_ data: T, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  public func append(_ data: [Swift.String : Any], fileName: Swift.String, completion: TealiumCore.TealiumCompletion?)
+  public func retrieve<T>(as type: T.Type) -> T? where T : Swift.Decodable
+  public func retrieve<T>(_ fileName: Swift.String, as type: T.Type) -> T? where T : Swift.Decodable
+  public func retrieve(fileName: Swift.String, completion: (Swift.Bool, [Swift.String : Any]?, Swift.Error?) -> Swift.Void)
+  public func delete(completion: TealiumCore.TealiumCompletion?)
+  public func update<T>(value: Any, for key: Swift.String, as type: T.Type, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  public func saveStringToDefaults(key: Swift.String, value: Swift.String)
+  public func getStringFromDefaults(key: Swift.String) -> Swift.String?
+  public func saveToDefaults(key: Swift.String, value: Any)
+  public func getFromDefaults(key: Swift.String) -> Any?
+  public func removeFromDefaults(key: Swift.String)
+  @objc deinit
+}
+public enum LifecycleKey {
+}
+public enum LifecycleType {
+  case launch, sleep, wake
+  public var description: Swift.String {
+    get
+  }
+  public static func == (a: TealiumCore.LifecycleType, b: TealiumCore.LifecycleType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+final public class AtomicInteger {
+  public init(value initialValue: Swift.Int = 0)
+  final public var value: Swift.Int {
+    get
+    set
+  }
+  @discardableResult
+  final public func decrementAndGet() -> Swift.Int
+  @discardableResult
+  final public func incrementAndGet() -> Swift.Int
+  final public func resetToZero()
+  @objc deinit
+}
+extension Disk {
+  public static func save<T>(_ value: T, to directory: TealiumCore.Disk.Directory, as path: Swift.String, encoder: Foundation.JSONEncoder = Tealium.jsonEncoder) throws where T : Swift.Encodable
+  public static func append<T>(_ value: T, to path: Swift.String, in directory: TealiumCore.Disk.Directory, decoder: Foundation.JSONDecoder = Tealium.jsonDecoder, encoder: Foundation.JSONEncoder = Tealium.jsonEncoder) throws where T : Swift.Decodable, T : Swift.Encodable
+  public static func append<T>(_ value: [T], to path: Swift.String, in directory: TealiumCore.Disk.Directory, decoder: Foundation.JSONDecoder = Tealium.jsonDecoder, encoder: Foundation.JSONEncoder = Tealium.jsonEncoder) throws where T : Swift.Decodable, T : Swift.Encodable
+  public static func retrieve<T>(_ path: Swift.String, from directory: TealiumCore.Disk.Directory, as type: T.Type, decoder: Foundation.JSONDecoder = Tealium.jsonDecoder) throws -> T where T : Swift.Decodable
+}
+public protocol TealiumRequest {
+  var typeId: Swift.String { get set }
+  static func instanceTypeId() -> Swift.String
+}
+public struct TealiumUpdateConfigRequest : TealiumCore.TealiumRequest {
+  public var typeId: Swift.String
+  public let config: TealiumCore.TealiumConfig
+  public init(config: TealiumCore.TealiumConfig)
+  public static func instanceTypeId() -> Swift.String
+}
+public struct TealiumEnqueueRequest : TealiumCore.TealiumRequest {
+  public var typeId: Swift.String
+  public var data: [TealiumCore.TealiumTrackRequest]
+  public init(data: TealiumCore.TealiumTrackRequest, queueReason: Swift.String? = nil)
+  public init(data: TealiumCore.TealiumBatchTrackRequest, queueReason: Swift.String? = nil)
+  public static func instanceTypeId() -> Swift.String
+}
+public struct TealiumRemoteAPIRequest : TealiumCore.TealiumRequest {
+  public var typeId: Swift.String
+  public var trackRequest: TealiumCore.TealiumTrackRequest
+  public init(trackRequest: TealiumCore.TealiumTrackRequest)
+  public static func instanceTypeId() -> Swift.String
+}
+public struct TealiumRemoteCommandRequest : TealiumCore.TealiumRequest {
+  public var typeId: Swift.String
+  public var data: [Swift.String : Any]
+  public init(data: [Swift.String : Any])
+  public static func instanceTypeId() -> Swift.String
+}
+public struct TealiumRemoteCommandRequestResponse : TealiumCore.TealiumRequest {
+  public var typeId: Swift.String
+  public var data: [Swift.String : Any]
+  public init(data: [Swift.String : Any])
+  public static func instanceTypeId() -> Swift.String
+}
+public struct TealiumTrackRequest : TealiumCore.TealiumRequest, Swift.Codable, Swift.Comparable {
+  public static func < (lhs: TealiumCore.TealiumTrackRequest, rhs: TealiumCore.TealiumTrackRequest) -> Swift.Bool
+  public static func == (lhs: TealiumCore.TealiumTrackRequest, rhs: TealiumCore.TealiumTrackRequest) -> Swift.Bool
+  public var uuid: Swift.String {
+    get
+    set
+  }
+  public var typeId: Swift.String
+  public var data: TealiumCore.AnyEncodable
+  public var trackDictionary: [Swift.String : Any] {
+    get
+  }
+  public init(data: [Swift.String : Any])
+  public static func instanceTypeId() -> Swift.String
+  public func encode(to encoder: Swift.Encoder) throws
+  public var visitorId: Swift.String? {
+    get
+  }
+  public init(from decoder: Swift.Decoder) throws
+  public mutating func deleteKey(_ key: Swift.String)
+  public var event: Swift.String? {
+    get
+  }
+}
+public struct TealiumBatchTrackRequest : TealiumCore.TealiumRequest, Swift.Codable {
+  public var typeId: Swift.String
+  public var uuid: Swift.String
+  public var trackRequests: [TealiumCore.TealiumTrackRequest]
+  public static func instanceTypeId() -> Swift.String
+  public init(trackRequests: [TealiumCore.TealiumTrackRequest])
+  public init(from decoder: Swift.Decoder) throws
+  public func compressed() -> [Swift.String : Any]?
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol TealiumDispatch {
+  var trackRequest: TealiumCore.TealiumTrackRequest { get }
+}
+public struct TealiumEvent : TealiumCore.TealiumDispatch {
+  public init(_ eventName: Swift.String, dataLayer: [Swift.String : Any]? = nil)
+  public var trackRequest: TealiumCore.TealiumTrackRequest {
+    get
+  }
+}
+public struct TealiumView : TealiumCore.TealiumDispatch {
+  public init(_ viewName: Swift.String, dataLayer: [Swift.String : Any]? = nil)
+  public var trackRequest: TealiumCore.TealiumTrackRequest {
+    get
+  }
+}
+extension TealiumTrackRequest {
+  public func extractKey(lookup: [Swift.String : Swift.String]?) -> Swift.String?
+  public func extractLookupValue(for key: Swift.String) -> Any?
+}
+extension DeviceData {
+  public var basicModel: Swift.String {
+    get
+  }
+  public var model: [Swift.String : Swift.String] {
+    get
+  }
+}
+public typealias ModuleCompletion = (((Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?)) -> Swift.Void)
+@_hasMissingDesignatedInitializers public class ModulesManager {
+  public var modules: [TealiumCore.TealiumModule] {
+    get
+    set
+  }
+  @objc deinit
+}
+extension ModulesManager : TealiumCore.ModuleDelegate {
+  public func requestTrack(_ track: TealiumCore.TealiumTrackRequest)
+  public func requestDequeue(reason: Swift.String)
+  public func processRemoteCommandRequest(_ request: TealiumCore.TealiumRequest)
+}
+extension ModulesManager : TealiumCore.ConnectivityDelegate {
+  public func connectionLost()
+  public func connectionRestored()
+}
+public class HostedDataLayer {
+  public var id: Swift.String
+  public var config: TealiumCore.TealiumConfig
+  public var data: [Swift.String : Any]?
+  required public init(config: TealiumCore.TealiumConfig, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol?, completion: (Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?) -> Swift.Void)
+  public func shouldQueue(request: TealiumCore.TealiumRequest) -> (Swift.Bool, [Swift.String : Any]?)
+  public func shouldDrop(request: TealiumCore.TealiumRequest) -> Swift.Bool
+  public func shouldPurge(request: TealiumCore.TealiumRequest) -> Swift.Bool
+  @objc deinit
+}
+extension Array {
+  public func chunks(_ chunkSize: Swift.Int) -> [[Element]]
+}
+public protocol TealiumDiskStorageProtocol {
+  func save(_ data: TealiumCore.AnyCodable, completion: TealiumCore.TealiumCompletion?)
+  func save(_ data: TealiumCore.AnyCodable, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?)
+  func save<T>(_ data: T, completion: TealiumCore.TealiumCompletion?) where T : Swift.Encodable
+  func save<T>(_ data: T, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?) where T : Swift.Encodable
+  func append<T>(_ data: T, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  func append<T>(_ data: T, fileName: Swift.String, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  func append(_ data: [Swift.String : Any], fileName: Swift.String, completion: TealiumCore.TealiumCompletion?)
+  func retrieve<T>(as type: T.Type) -> T? where T : Swift.Decodable
+  func retrieve<T>(_ fileName: Swift.String, as type: T.Type) -> T? where T : Swift.Decodable
+  func retrieve(fileName: Swift.String, completion: (Swift.Bool, [Swift.String : Any]?, Swift.Error?) -> Swift.Void)
+  func update<T>(value: Any, for key: Swift.String, as type: T.Type, completion: TealiumCore.TealiumCompletion?) where T : Swift.Decodable, T : Swift.Encodable
+  func delete(completion: TealiumCore.TealiumCompletion?)
+  func totalSizeSavedData() -> Swift.String?
+  func saveStringToDefaults(key: Swift.String, value: Swift.String)
+  func getStringFromDefaults(key: Swift.String) -> Swift.String?
+  func saveToDefaults(key: Swift.String, value: Any)
+  func getFromDefaults(key: Swift.String) -> Any?
+  func removeFromDefaults(key: Swift.String)
+  func canWrite() -> Swift.Bool
+}
+public class ConsentManager {
+  public var userConsentStatus: TealiumCore.TealiumConsentStatus {
+    get
+    set
+  }
+  public var userConsentCategories: [TealiumCore.TealiumConsentCategories]? {
+    get
+    set
+  }
+  public init(config: TealiumCore.TealiumConfig, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol, dataLayer: TealiumCore.DataLayerManagerProtocol?)
+  @objc deinit
+}
+extension ConsentManager {
+  public func resetUserConsentPreferences()
+}
+public protocol LogRequest {
+  var logLevel: TealiumCore.TealiumLogLevel { get set }
+  var title: Swift.String { get set }
+  var messages: [Swift.String] { get set }
+  var info: [Swift.String : Any]? { get set }
+  var logCategory: TealiumCore.TealiumLogCategory? { get set }
+  var formattedString: Swift.String { get }
+}
+public enum TealiumLogCategory {
+  case `init`
+  case track
+  case general
+  public static func == (a: TealiumCore.TealiumLogCategory, b: TealiumCore.TealiumLogCategory) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct TealiumLogRequest : TealiumCore.LogRequest {
+  public var messages: [Swift.String]
+  public var logLevel: TealiumCore.TealiumLogLevel
+  public var title: Swift.String
+  public var logCategory: TealiumCore.TealiumLogCategory?
+  public var info: [Swift.String : Any]?
+  public var formattedString: Swift.String {
+    get
+  }
+  public init(title: Swift.String = "Tealium Log", messages: [Swift.String], info: [Swift.String : Any]? = nil, logLevel: TealiumCore.TealiumLogLevel = .info, category: TealiumCore.TealiumLogCategory? = nil)
+  public init(title: Swift.String = "Tealium Log", message: Swift.String, info: [Swift.String : Any]? = nil, logLevel: TealiumCore.TealiumLogLevel = .info, category: TealiumCore.TealiumLogCategory? = nil)
+}
+extension DeviceData {
+  public enum Unit : Swift.Double {
+    case byte
+    case kilobyte
+    case megabyte
+    case gigabyte
+    public typealias RawValue = Swift.Double
+    public init?(rawValue: Swift.Double)
+    public var rawValue: Swift.Double {
+      get
+    }
+  }
+  public var memoryUsage: [Swift.String : Swift.String] {
+    get
+  }
+}
+public protocol DispatchValidator {
+  var id: Swift.String { get }
+  func shouldQueue(request: TealiumCore.TealiumRequest) -> (Swift.Bool, [Swift.String : Any]?)
+  func shouldDrop(request: TealiumCore.TealiumRequest) -> Swift.Bool
+  func shouldPurge(request: TealiumCore.TealiumRequest) -> Swift.Bool
+}
+public protocol TealiumLoggerProtocol {
+  var config: TealiumCore.TealiumConfig? { get set }
+  init(config: TealiumCore.TealiumConfig)
+  func log(_ request: TealiumCore.TealiumLogRequest)
+}
+public class ConnectivityModule : TealiumCore.Collector, TealiumCore.ConnectivityDelegate {
+  public var id: Swift.String
+  public var data: [Swift.String : Any]? {
+    get
+  }
+  public var config: TealiumCore.TealiumConfig {
+    get
+    set
+  }
+  required public init(context: TealiumCore.TealiumContext, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol?, completion: ((Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?)) -> Swift.Void)
+  public func connectionLost()
+  public func connectionRestored()
+  @objc deinit
+}
+public enum DeviceDataKey {
+  public static let batteryPercent: Swift.String
+  public static let isCharging: Swift.String
+  public static let appMemoryUsage: Swift.String
+  public static let memoryFree: Swift.String
+  public static let memoryActive: Swift.String
+  public static let memoryInactive: Swift.String
+  public static let memoryCompressed: Swift.String
+  public static let memoryWired: Swift.String
+  public static let physicalMemory: Swift.String
+  public static let orientation: Swift.String
+  public static let fullOrientation: Swift.String
+  public static let osBuild: Swift.String
+  public static let osVersion: Swift.String
+  public static let carrier: Swift.String
+  public static let carrierMNC: Swift.String
+  public static let carrierMCC: Swift.String
+  public static let carrierISO: Swift.String
+  public static let fileName: Swift.String
+  public static let appOrientation: Swift.String
+  public static let deviceOrientation: Swift.String
+  public static let appOrientationExtended: Swift.String
+}
+public enum DeviceDataValue {
+}
+public typealias DataTaskCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> Swift.Void
+public typealias DataTaskResult = Swift.Result<(Foundation.HTTPURLResponse?, Foundation.Data?), Swift.Error>
+public protocol URLSessionProtocol {
+  func tealiumDataTask(with url: Foundation.URL, completionHandler: @escaping TealiumCore.DataTaskCompletion) -> TealiumCore.URLSessionDataTaskProtocol
+  func tealiumDataTask(with request: Foundation.URLRequest, completionHandler: @escaping TealiumCore.DataTaskCompletion) -> TealiumCore.URLSessionDataTaskProtocol
+  func tealiumDataTask(with url: Foundation.URL, completionHandler: @escaping (TealiumCore.DataTaskResult) -> Swift.Void) -> TealiumCore.URLSessionDataTaskProtocol
+  func finishTealiumTasksAndInvalidate()
+}
+public protocol URLSessionDataTaskProtocol {
+  func resume()
+}
+public protocol ModuleDelegate : AnyObject {
+  func requestTrack(_ track: TealiumCore.TealiumTrackRequest)
+  func requestDequeue(reason: Swift.String)
+  func processRemoteCommandRequest(_ request: TealiumCore.TealiumRequest)
+}
+extension Disk {
+  public static var totalCapacity: Swift.Int? {
+    get
+  }
+  public static var availableCapacity: Swift.Int64? {
+    get
+  }
+  @available(iOS 11.0, *)
+  public static var availableCapacityForImportantUsage: Swift.Int? {
+    get
+  }
+  @available(iOS 11.0, *)
+  public static var availableCapacityForOpportunisticUsage: Swift.Int? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Disk {
+  public enum Directory : Swift.Equatable {
+    case documents
+    case caches
+    case applicationSupport
+    case temporary
+    case sharedContainer(appGroupName: Swift.String)
+    public var pathDescription: Swift.String {
+      get
+    }
+    public static func == (lhs: TealiumCore.Disk.Directory, rhs: TealiumCore.Disk.Directory) -> Swift.Bool
+  }
+  @objc deinit
+}
+extension TealiumValue {
+  public static let defaultLogLevel: TealiumCore.TealiumLogLevel
+}
+public enum TealiumLogLevel : Swift.Int, Swift.Comparable, Swift.CustomStringConvertible {
+  case info
+  case debug
+  case error
+  case fault
+  case silent
+  public init(from string: Swift.String)
+  public var description: Swift.String {
+    get
+  }
+  public static func < (lhs: TealiumCore.TealiumLogLevel, rhs: TealiumCore.TealiumLogLevel) -> Swift.Bool
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum TealiumLoggerType {
+  case print
+  case os
+  case custom(TealiumCore.TealiumLoggerProtocol)
+}
+public class TealiumMulticastDelegate<T> {
+  public init()
+  public func add(_ delegate: T)
+  public func all() -> [TealiumCore.Weak<Swift.AnyObject>]
+  public func remove(_ delegate: T)
+  public func removeAll()
+  public var count: Swift.Int {
+    get
+  }
+  public func invoke(_ invocation: (T) -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class TealiumQueues {
+  public static let backgroundConcurrentQueue: TealiumCore.ReadWrite
+  public static let mainQueue: Dispatch.DispatchQueue
+  public static let backgroundSerialQueue: Dispatch.DispatchQueue
+  @objc deinit
+}
+public struct UserConsentPreferences : Swift.Equatable, Swift.Codable {
+  public init(consentStatus: TealiumCore.TealiumConsentStatus, consentCategories: [TealiumCore.TealiumConsentCategories]?)
+  public mutating func initWithDictionary(preferencesDictionary: [Swift.String : Any])
+  public var dictionary: [Swift.String : Any]? {
+    get
+  }
+  public mutating func setConsentStatus(_ status: TealiumCore.TealiumConsentStatus)
+  public mutating func setConsentCategories(_ categories: [TealiumCore.TealiumConsentCategories])
+  public mutating func resetConsentCategories()
+  public init(from decoder: Swift.Decoder) throws
+  public static func == (a: TealiumCore.UserConsentPreferences, b: TealiumCore.UserConsentPreferences) -> Swift.Bool
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension TealiumConfig {
+  public var dispatchAfter: Swift.Int {
+    get
+    set
+  }
+  public var batchingBypassKeys: [Swift.String]? {
+    get
+    set
+  }
+  public var remoteAPIEnabled: Swift.Bool? {
+    get
+    set
+  }
+  public var lifecycleAutoTrackingEnabled: Swift.Bool {
+    get
+    set
+  }
+}
+public class Tealium {
+  public static var lifecycleListeners: TealiumCore.TealiumLifecycleListeners
+  public var dataLayer: TealiumCore.DataLayerManagerProtocol
+  public var zz_internal_modulesManager: TealiumCore.ModulesManager?
+  public var migrator: TealiumCore.Migratable
+  public init(config: TealiumCore.TealiumConfig, dataLayer: TealiumCore.DataLayerManagerProtocol? = nil, modulesManager: TealiumCore.ModulesManager? = nil, migrator: TealiumCore.Migratable? = nil, enableCompletion: ((Swift.Result<Swift.Bool, Swift.Error>) -> Swift.Void)?)
+  convenience public init(config: TealiumCore.TealiumConfig)
+  public func disable()
+  public func flushQueue()
+  public func track(_ dispatch: TealiumCore.TealiumDispatch)
+  @objc deinit
+}
+public protocol ConsentConfigurable {
+  var consentStatus: Swift.Int { get set }
+  var consentCategories: [Swift.String] { get set }
+  var enableConsentLogging: Swift.Bool { get set }
+}
+@objc public class LegacyConsentConfiguration : ObjectiveC.NSObject, Foundation.NSSecureCoding, TealiumCore.ConsentConfigurable {
+  public var consentStatus: Swift.Int
+  public var consentCategories: [Swift.String]
+  public var enableConsentLogging: Swift.Bool
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
+  @objc required public init?(coder: Foundation.NSCoder)
+  @objc public func encode(with: Foundation.NSCoder)
+  @objc deinit
+  @objc override dynamic public init()
+}
+open class TealiumConfig {
+  final public let account: Swift.String
+  final public let profile: Swift.String
+  final public let environment: Swift.String
+  final public let dataSource: Swift.String?
+  public var options: [Swift.String : Any] {
+    get
+    set
+  }
+  public var logger: TealiumCore.TealiumLoggerProtocol? {
+    get
+    set
+  }
+  public var appDelegateProxyEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var skAdConversionKeys: [Swift.String : Swift.String]? {
+    get
+    set
+  }
+  public var shouldMigratePersistentData: Swift.Bool {
+    get
+    set
+  }
+  public var dispatchValidators: [TealiumCore.DispatchValidator]? {
+    get
+    set
+  }
+  public var dispatchListeners: [TealiumCore.DispatchListener]? {
+    get
+    set
+  }
+  public var collectors: [TealiumCore.Collector.Type]? {
+    get
+    set
+  }
+  public var dispatchers: [TealiumCore.Dispatcher.Type]? {
+    get
+    set
+  }
+  public var copy: TealiumCore.TealiumConfig {
+    get
+  }
+  convenience public init(account: Swift.String, profile: Swift.String, environment: Swift.String)
+  convenience public init(account: Swift.String, profile: Swift.String, environment: Swift.String, dataSource: Swift.String?)
+  public init(account: Swift.String, profile: Swift.String, environment: Swift.String, dataSource: Swift.String? = nil, options: [Swift.String : Any]?)
+  @objc deinit
+}
+extension TealiumConfig : Swift.Equatable, Swift.Hashable {
+  public static func == (lhs: TealiumCore.TealiumConfig, rhs: TealiumCore.TealiumConfig) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  open var hashValue: Swift.Int {
+    get
+  }
+}
+extension TealiumConfig {
+  public var existingVisitorId: Swift.String? {
+    get
+    set
+  }
+}
+extension TealiumConfig {
+  public var shouldUseRemotePublishSettings: Swift.Bool {
+    get
+    set
+  }
+  public var publishSettingsURL: Swift.String? {
+    get
+    set
+  }
+  public var publishSettingsProfile: Swift.String? {
+    get
+    set
+  }
+  public var isEnabled: Swift.Bool? {
+    get
+    set
+  }
+  public var isTagManagementEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var isCollectEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var batterySaverEnabled: Swift.Bool? {
+    get
+    set
+  }
+  public var dispatchExpiration: Swift.Int? {
+    get
+    set
+  }
+  public var batchingEnabled: Swift.Bool? {
+    get
+    set
+  }
+  public var batchSize: Swift.Int {
+    get
+    set
+  }
+  public var dispatchQueueLimit: Swift.Int? {
+    get
+    set
+  }
+  public var wifiOnlySending: Swift.Bool? {
+    get
+    set
+  }
+  public var minutesBetweenRefresh: Swift.Double? {
+    get
+    set
+  }
+}
+extension TealiumConfig {
+  public var deepLinkTrackingEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var qrTraceEnabled: Swift.Bool {
+    get
+    set
+  }
+}
+public enum ConsentKey {
+}
+public enum TealiumConsentCategories : Swift.String, Swift.Codable {
+  case analytics
+  case affiliates
+  case displayAds
+  case email
+  case personalization
+  case search
+  case social
+  case bigData
+  case mobile
+  case engagement
+  case monitoring
+  case crm
+  case cdp
+  case cookieMatch
+  case misc
+  public static func consentCategoriesStringArrayToEnum(_ categories: [Swift.String]) -> [TealiumCore.TealiumConsentCategories]
+  public static var all: [TealiumCore.TealiumConsentCategories] {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum TealiumConsentPolicy : Swift.String {
+  case ccpa
+  case gdpr
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum TealiumConsentStatus : Swift.String, Swift.Codable {
+  case unknown
+  case consented
+  case notConsented
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum TealiumConsentTrackAction : Swift.Equatable {
+  case trackingAllowed
+  case trackingForbidden
+  case trackingQueued
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: TealiumCore.TealiumConsentTrackAction, b: TealiumCore.TealiumConsentTrackAction) -> Swift.Bool
+}
+extension TealiumConsentStatus {
+  public init(integer: Swift.Int)
+}
+public class AppDataModule : TealiumCore.Collector {
+  final public let id: Swift.String
+  public var data: [Swift.String : Any]? {
+    get
+  }
+  public var config: TealiumCore.TealiumConfig
+  required public init(context: TealiumCore.TealiumContext, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol?, completion: ((Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?)) -> Swift.Void)
+  @objc deinit
+}
+extension Dictionary where Key == Swift.String, Value == Any {
+  public var toJSONString: Swift.String? {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class NetworkUtils {
+  public static func urlPOSTRequestWithJSONString(_ jsonString: Swift.String, dispatchURL: Swift.String) -> Foundation.URLRequest?
+  @objc deinit
+}
+public enum NetworkError : Swift.String, Foundation.LocalizedError {
+  case couldNotCreateSession
+  case unknownResponseType
+  case noInternet
+  case xErrorDetected
+  case non200Response
+  case noDataToTrack
+  case unknownIssueWithSend
+  case invalidURL
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension Collectors {
+  public static let AppData: TealiumCore.AppDataModule.Type
+}
+public enum MigrationKey {
+}
+public protocol Migratable {
+  func migratePersistent(dataLayer: TealiumCore.DataLayerManagerProtocol)
+}
+public struct Migrator : TealiumCore.Migratable {
+  public func migratePersistent(dataLayer: TealiumCore.DataLayerManagerProtocol)
+}
+public enum RefreshTime {
+  case seconds
+  case minutes
+  case hours
+  public static func == (a: TealiumCore.RefreshTime, b: TealiumCore.RefreshTime) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum TealiumRefreshInterval {
+  case every(Swift.Int, TealiumCore.RefreshTime)
+  public var interval: Foundation.TimeInterval {
+    get
+  }
+}
+extension DataLayer {
+  public func joinTrace(id: Swift.String)
+  public func leaveTrace()
+}
+extension Tealium {
+  public func joinTrace(id: Swift.String)
+  public func leaveTrace()
+  public func killTraceVisitorSession()
+  public func handleDeepLink(_ link: Foundation.URL)
+}
+public class TealiumLifecycleListeners {
+  public init()
+  public func addDelegate(delegate: TealiumCore.TealiumLifecycleEvents)
+  public func removeDelegate(delegate: TealiumCore.TealiumLifecycleEvents)
+  public func launch()
+  public func sleep()
+  public func wake()
+  @objc deinit
+}
+public class DeviceData : TealiumCore.DeviceDataCollection {
+  public init()
+  public var cpuType: Swift.String {
+    get
+  }
+  @objc deinit
+}
+extension DeviceData {
+  public class var oSBuild: Swift.String {
+    get
+  }
+  public class var oSVersion: Swift.String {
+    get
+  }
+  public class var oSName: Swift.String {
+    get
+  }
+}
+public enum Collectors {
+}
+public enum Dispatchers {
+}
+public enum TealiumValue {
+  public static let libraryName: Swift.String
+  public static let libraryVersion: Swift.String
+  public static let maxEventBatchSize: Swift.Int
+  public static let defaultMinimumDiskSpace: Swift.Int32
+  public static let tiqBaseURL: Swift.String
+  public static let tiqURLSuffix: Swift.String
+  public static let defaultBatchExpirationDays: Swift.Int
+  public static let defaultMaxQueueSize: Swift.Int
+  public static let unknown: Swift.String
+}
+public enum ModuleNames {
+  public static let autotracking: Swift.String
+  public static let appdata: Swift.String
+  public static let attribution: Swift.String
+  public static let collect: Swift.String
+  public static let connectivity: Swift.String
+  public static let consentmanager: Swift.String
+  public static let crash: Swift.String
+  public static let devicedata: Swift.String
+  public static let lifecycle: Swift.String
+  public static let location: Swift.String
+  public static let remotecommands: Swift.String
+  public static let tagmanagement: Swift.String
+  public static let visitorservice: Swift.String
+}
+public enum TealiumKey {
+  public static let account: Swift.String
+  public static let profile: Swift.String
+  public static let environment: Swift.String
+  public static let event: Swift.String
+  public static let callType: Swift.String
+  public static let screenTitle: Swift.String
+  public static let eventType: Swift.String
+  public static let libraryName: Swift.String
+  public static let libraryVersion: Swift.String
+  public static let queueReason: Swift.String
+  public static let wasQueued: Swift.String
+  public static let dispatchService: Swift.String
+  public static let updateConsentCookieEventNames: [Swift.String]
+  public static let jsNotificationName: Swift.String
+  public static let tagmanagementNotification: Swift.String
+  public static let jsCommand: Swift.String
+  public static let tealiumURLScheme: Swift.String
+  public static let dataSource: Swift.String
+  public static let sessionId: Swift.String
+  public static let visitorId: Swift.String
+  public static let random: Swift.String
+  public static let uuid: Swift.String
+  public static let requestUUID: Swift.String
+  public static let simpleModel: Swift.String
+  public static let device: Swift.String
+  public static let deviceType: Swift.String
+  public static let fullModel: Swift.String
+  public static let architecture: Swift.String
+  public static let cpuType: Swift.String
+  public static let language: Swift.String
+  public static let osName: Swift.String
+  public static let platform: Swift.String
+  public static let resolution: Swift.String
+  public static let minimumFreeDiskSpace: Swift.String
+  public static let diskStorageEnabled: Swift.String
+  public static let logLevelConfig: Swift.String
+  public static let timestampUnix: Swift.String
+  public static let timestampUnixMilliseconds: Swift.String
+  public static let prod: Swift.String
+  public static let dev: Swift.String
+  public static let qa: Swift.String
+  public static let errorHeaderKey: Swift.String
+  public static let diskStorageDirectory: Swift.String
+  public static let remoteAPICallType: Swift.String
+  public static let publishSettings: Swift.String
+  public static let publishSettingsURL: Swift.String
+  public static let publishSettingsProfile: Swift.String
+  public static let enabledModules: Swift.String
+  public static let libraryEnabled: Swift.String
+  public static let batterySaver: Swift.String
+  public static let queueSizeKey: Swift.String
+  public static let batchSizeKey: Swift.String
+  public static let eventLimit: Swift.String
+  public static let batchingEnabled: Swift.String
+  public static let batchExpirationDaysKey: Swift.String
+  public static let wifiOnlyKey: Swift.String
+  public static let minutesBetweenRefresh: Swift.String
+  public static let collectModuleName: Swift.String
+  public static let tagManagementModuleName: Swift.String
+  public static let loggerType: Swift.String
+  public static let logLevel: Swift.String
+  public static let logger: Swift.String
+  public static let dispatchValidators: Swift.String
+  public static let dispatchListeners: Swift.String
+  public static let collectors: Swift.String
+  public static let dispatchers: Swift.String
+  public static let traceId: Swift.String
+}
+public enum TealiumTrackType {
+  case view
+  case event
+  public static func == (a: TealiumCore.TealiumTrackType, b: TealiumCore.TealiumTrackType) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public typealias TealiumCompletion = ((Swift.Bool, [Swift.String : Any]?, Swift.Error?) -> Swift.Void)
+public enum HttpStatusCodes : Swift.Int {
+  case notModified
+  case ok
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class TealiumInstanceManager {
+  public var tealiumInstances: [Swift.String : TealiumCore.Tealium] {
+    get
+    set
+  }
+  public static var shared: TealiumCore.TealiumInstanceManager
+  public func removeInstance(config: TealiumCore.TealiumConfig)
+  public func removeInstanceForKey(_ instanceKey: Swift.String)
+  public func getInstanceByName(_ instanceKey: Swift.String) -> TealiumCore.Tealium?
+  public func disable()
+  @objc deinit
+}
+extension DeviceData {
+  public class var resolution: Swift.String {
+    get
+  }
+  public var orientation: [Swift.String : Swift.String] {
+    get
+  }
+}
+public protocol Dispatcher : TealiumCore.TealiumModule {
+  init(config: TealiumCore.TealiumConfig, delegate: TealiumCore.ModuleDelegate, completion: TealiumCore.ModuleCompletion?)
+  func dynamicTrack(_ request: TealiumCore.TealiumRequest, completion: TealiumCore.ModuleCompletion?)
+}
+extension Set where Element == TealiumCore.DataLayerItem {
+  public mutating func insert(from dictionary: [Swift.String : Any], expires: Foundation.Date)
+  public mutating func insert(key: Swift.String, value: Any, expires: Foundation.Date)
+  public mutating func remove(key: Swift.String)
+  public func removeExpired() -> Swift.Set<TealiumCore.DataLayerItem>
+  public var all: [Swift.String : Any] {
+    get
+  }
+}
+public struct DataLayerItem : Swift.Codable, Swift.Hashable {
+  public static func == (lhs: TealiumCore.DataLayerItem, rhs: TealiumCore.DataLayerItem) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+  public init(key: Swift.String, value: Any, expires: Foundation.Date)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum HTTPError : Swift.Error {
+  case transportError(Swift.Error)
+  case serverSideError(Swift.Int)
+  case unknown
+}
+extension URLSession : TealiumCore.URLSessionProtocol {
+  public func tealiumDataTask(with url: Foundation.URL, completionHandler: @escaping TealiumCore.DataTaskCompletion) -> TealiumCore.URLSessionDataTaskProtocol
+  public func tealiumDataTask(with request: Foundation.URLRequest, completionHandler: @escaping TealiumCore.DataTaskCompletion) -> TealiumCore.URLSessionDataTaskProtocol
+  public func tealiumDataTask(with url: Foundation.URL, completionHandler: @escaping (TealiumCore.DataTaskResult) -> Swift.Void) -> TealiumCore.URLSessionDataTaskProtocol
+  public func finishTealiumTasksAndInvalidate()
+}
+extension URLSessionDataTask : TealiumCore.URLSessionDataTaskProtocol {
+}
+extension Tealium {
+  public var consentManager: TealiumCore.ConsentManager? {
+    get
+  }
+}
+extension TealiumConfig {
+  public var consentLoggingEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var consentPolicy: TealiumCore.TealiumConsentPolicy? {
+    get
+    set
+  }
+}
+public protocol TimestampCollection {
+  var currentTimeStamps: [Swift.String : Any] { get }
+}
+public protocol DataLayerManagerProtocol : AnyObject {
+  var all: [Swift.String : Any] { get set }
+  var allSessionData: [Swift.String : Any] { get }
+  var sessionId: Swift.String? { get set }
+  var sessionData: [Swift.String : Any] { get set }
+  func add(data: [Swift.String : Any], expiry: TealiumCore.Expiry?)
+  func add(key: Swift.String, value: Any, expiry: TealiumCore.Expiry?)
+  func joinTrace(id: Swift.String)
+  func leaveTrace()
+  func delete(for keys: [Swift.String])
+  func delete(for key: Swift.String)
+  func deleteAll()
+}
+public protocol TealiumModule {
+  var id: Swift.String { get }
+  var config: TealiumCore.TealiumConfig { get set }
+}
+public class TealiumRepeatingTimer {
+  public init(timeInterval: Foundation.TimeInterval, dispatchQueue: Dispatch.DispatchQueue = TealiumQueues.backgroundSerialQueue)
+  public var eventHandler: (() -> Swift.Void)?
+  @objc deinit
+  public func resume()
+  public func suspend()
+}
+public protocol DeviceDataCollection {
+  var memoryUsage: [Swift.String : Swift.String] { get }
+  var orientation: [Swift.String : Swift.String] { get }
+  var model: [Swift.String : Swift.String] { get }
+  var basicModel: Swift.String { get }
+  var cpuType: Swift.String { get }
+}
+extension DeviceDataCollection {
+  public func architecture() -> Swift.String
+}
+public class ReadWrite {
+  public init(_ label: Swift.String)
+  @objc deinit
+  public func write(_ work: @escaping () -> Swift.Void)
+  public func write(after delay: Dispatch.DispatchTime, _ work: @escaping () -> Swift.Void)
+  @discardableResult
+  public func read<T>(_ work: () throws -> T) rethrows -> T
+}
+public class TealiumLogger : TealiumCore.TealiumLoggerProtocol {
+  weak public var config: TealiumCore.TealiumConfig?
+  required public init(config: TealiumCore.TealiumConfig)
+  public func log(_ request: TealiumCore.TealiumLogRequest)
+  @objc deinit
+}
+public enum Expiry {
+  case session
+  case untilRestart
+  case forever
+  case after(Foundation.Date)
+  case afterCustom((TealiumCore.TimeUnit, Swift.Int))
+  public var date: Foundation.Date {
+    get
+  }
+}
+public enum TimeUnit {
+  case minutes
+  case hours
+  case days
+  case months
+  case years
+  public var component: Foundation.Calendar.Component {
+    get
+  }
+  public static func == (a: TealiumCore.TimeUnit, b: TealiumCore.TimeUnit) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct PersistentAppData : Swift.Codable {
+  public var visitorId: Swift.String
+  public var uuid: Swift.String
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+  public static func new(from existingData: [Swift.String : Any]) -> TealiumCore.PersistentAppData?
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension TealiumConfig {
+  public var connectivityRefreshInterval: Swift.Int? {
+    get
+    set
+  }
+  public var connectivityRefreshEnabled: Swift.Bool? {
+    get
+    set
+  }
+}
+extension Collectors {
+  public static let Connectivity: TealiumCore.ConnectivityModule.Type
+}
+extension Tealium {
+  public var visitorId: Swift.String? {
+    get
+  }
+}
+extension TealiumConfig {
+  public var hostedDataLayerKeys: [Swift.String : Swift.String]? {
+    get
+    set
+  }
+  public var hostedDataLayerExpiry: (Swift.Int, unit: TealiumCore.TimeUnit) {
+    get
+    set
+  }
+}
+extension TealiumValue {
+  public static let defaultMinutesBetweenSession: Swift.Int
+  public static let defaultsSecondsBetweenTrackEvents: Swift.Double
+  public static let sessionBaseURL: Swift.String
+}
+extension TealiumKey {
+  public static let timestampEpoch: Swift.String
+  public static let timestamp: Swift.String
+  public static let timestampLocal: Swift.String
+  public static let timestampOffset: Swift.String
+}
+extension String {
+  public var dateFromISOString: Foundation.Date? {
+    get
+  }
+  public var dateFromISOStringShort: Foundation.Date? {
+    get
+  }
+}
+public enum SessionError : Foundation.LocalizedError {
+  case errorInRequest
+  case invalidResponse
+  case invalidURL
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: TealiumCore.SessionError, b: TealiumCore.SessionError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct CompressionLevel : Swift.RawRepresentable {
+  public let rawValue: Swift.Int32
+  public static let noCompression: TealiumCore.CompressionLevel
+  public static let bestSpeed: TealiumCore.CompressionLevel
+  public static let bestCompression: TealiumCore.CompressionLevel
+  public static let defaultCompression: TealiumCore.CompressionLevel
+  public init(rawValue: Swift.Int32)
+  public init(_ rawValue: Swift.Int32)
+  public typealias RawValue = Swift.Int32
+}
+public struct GzipError : Swift.Error {
+  public enum Kind : Swift.Equatable {
+    case stream
+    case data
+    case memory
+    case buffer
+    case version
+    case unknown(code: Swift.Int)
+    public static func == (a: TealiumCore.GzipError.Kind, b: TealiumCore.GzipError.Kind) -> Swift.Bool
+  }
+  public let kind: TealiumCore.GzipError.Kind
+  public let message: Swift.String
+  public var localizedDescription: Swift.String {
+    get
+  }
+}
+extension Data {
+  public var isGzipped: Swift.Bool {
+    get
+  }
+  public func gzipped(level: TealiumCore.CompressionLevel = .defaultCompression) throws -> Foundation.Data
+  public func gunzipped() throws -> Foundation.Data
+}
+public protocol AppDataCollection {
+  func name(bundle: Foundation.Bundle) -> Swift.String?
+  func rdns(bundle: Foundation.Bundle) -> Swift.String?
+  func version(bundle: Foundation.Bundle) -> Swift.String?
+  func build(bundle: Foundation.Bundle) -> Swift.String?
+}
+extension AppDataCollection {
+  public func name(bundle: Foundation.Bundle) -> Swift.String?
+  public func rdns(bundle: Foundation.Bundle) -> Swift.String?
+  public func version(bundle: Foundation.Bundle) -> Swift.String?
+  public func build(bundle: Foundation.Bundle) -> Swift.String?
+}
+@_hasMissingDesignatedInitializers public class AppDataCollector : TealiumCore.AppDataCollection {
+  @objc deinit
+}
+public protocol TealiumLifecycleEvents {
+  func sleep()
+  func wake()
+  func launch(at date: Foundation.Date)
+}
+public struct TealiumContext : Swift.Hashable {
+  public static func == (lhs: TealiumCore.TealiumContext, rhs: TealiumCore.TealiumContext) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  unowned public var config: TealiumCore.TealiumConfig
+  weak public var dataLayer: TealiumCore.DataLayerManagerProtocol?
+  public init(config: TealiumCore.TealiumConfig, dataLayer: TealiumCore.DataLayerManagerProtocol, tealium: TealiumCore.Tealium)
+  public func track(_ dispatch: TealiumCore.TealiumDispatch)
+  public func handleDeepLink(_ url: Foundation.URL)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers public class Weak<T> : Swift.Equatable where T : AnyObject {
+  @objc deinit
+}
+public func == <T>(lhs: TealiumCore.Weak<T>, rhs: TealiumCore.Weak<T>) -> Swift.Bool where T : AnyObject
+public func += <K, V>(left: inout [K : V], right: [K : V]) where K : Swift.Hashable
+public func == (lhs: [Swift.String : Any], rhs: [Swift.String : Any]) -> Swift.Bool
+extension Dictionary where Key == Swift.String, Value == Any {
+  public var codable: TealiumCore.AnyCodable {
+    get
+  }
+  public var encodable: TealiumCore.AnyEncodable {
+    get
+  }
+}
+extension Date {
+  public var iso8601String: Swift.String {
+    get
+  }
+  public var extendedIso8601String: Swift.String {
+    get
+  }
+  public var iso8601LocalString: Swift.String {
+    get
+  }
+  public var mmDDYYYYString: Swift.String {
+    get
+  }
+  public var unixTimeMilliseconds: Swift.String {
+    get
+  }
+  public var unixTimeSeconds: Swift.String {
+    get
+  }
+  public var httpIfModifiedHeader: Swift.String {
+    get
+  }
+  public func millisecondsFrom(earlierDate: Foundation.Date) -> Swift.Int64
+  public func addSeconds(_ seconds: Swift.Double?) -> Foundation.Date?
+  public func addMinutes(_ mins: Swift.Double?) -> Foundation.Date?
+}
+extension Tealium {
+  public static var jsonEncoder: Foundation.JSONEncoder {
+    get
+  }
+  public static var jsonDecoder: Foundation.JSONDecoder {
+    get
+  }
+}
+final public class Atomic<T> {
+  final public var value: T {
+    get
+    set
+  }
+  public init(value initialValue: T)
+  @discardableResult
+  final public func setAndGet(to value: T) -> T
+  @objc deinit
+}
+public protocol Collector : TealiumCore.TealiumModule {
+  var data: [Swift.String : Any]? { get }
+  init(context: TealiumCore.TealiumContext, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol?, completion: ((Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?)) -> Swift.Void)
+}
+public class DataLayer : TealiumCore.DataLayerManagerProtocol, TealiumCore.TimestampCollection {
+  public var lastTrackDate: Foundation.Date?
+  public var minutesBetweenSessionIdentifier: Foundation.TimeInterval
+  public var numberOfTrackRequests: Swift.Int
+  public var secondsBetweenTrackEvents: Swift.Double
+  public var sessionData: [Swift.String : Any]
+  public var shouldTriggerSessionRequest: Swift.Bool
+  public var isTagManagementEnabled: Swift.Bool
+  public init(config: TealiumCore.TealiumConfig, diskStorage: TealiumCore.TealiumDiskStorageProtocol? = nil, sessionStarter: TealiumCore.SessionStarterProtocol? = nil)
+  public var all: [Swift.String : Any] {
+    get
+    set
+  }
+  public var allSessionData: [Swift.String : Any] {
+    get
+  }
+  public var currentTimeStamps: [Swift.String : Any] {
+    get
+  }
+  public var persistentDataStorage: Swift.Set<TealiumCore.DataLayerItem>? {
+    get
+    set
+  }
+  public func add(key: Swift.String, value: Any, expiry: TealiumCore.Expiry? = .session)
+  public func add(data: [Swift.String : Any], expiry: TealiumCore.Expiry? = .session)
+  public func delete(for keys: [Swift.String])
+  public func delete(for key: Swift.String)
+  public func deleteAll()
+  @objc deinit
+}
+public struct AnyDecodable : Swift.Decodable {
+  public let value: Any
+  public init<T>(_ value: T?)
+}
+extension AnyDecodable : Swift.Equatable {
+  public static func == (lhs: TealiumCore.AnyDecodable, rhs: TealiumCore.AnyDecodable) -> Swift.Bool
+}
+extension AnyDecodable : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension AnyDecodable : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension TealiumKey {
+  public static let appBuild: Swift.String
+  public static let appName: Swift.String
+  public static let appRDNS: Swift.String
+  public static let appVersion: Swift.String
+}
+public protocol SessionStarterProtocol {
+  var sessionURL: Swift.String { get }
+  func requestSession(_ completion: @escaping (Swift.Result<Foundation.HTTPURLResponse, Swift.Error>) -> Swift.Void)
+}
+public struct SessionStarter : TealiumCore.SessionStarterProtocol {
+  public init(config: TealiumCore.TealiumConfig, urlSession: TealiumCore.URLSessionProtocol = URLSession.shared)
+  public var sessionURL: Swift.String {
+    get
+  }
+  public func requestSession(_ completion: @escaping (Swift.Result<Foundation.HTTPURLResponse, Swift.Error>) -> Swift.Void = { _ in })
+}
+public class DeviceDataModule : TealiumCore.Collector {
+  final public let id: Swift.String
+  public var data: [Swift.String : Any]? {
+    get
+  }
+  public var config: TealiumCore.TealiumConfig
+  required public init(context: TealiumCore.TealiumContext, delegate: TealiumCore.ModuleDelegate?, diskStorage: TealiumCore.TealiumDiskStorageProtocol?, completion: ((Swift.Result<Swift.Bool, Swift.Error>, [Swift.String : Any]?)) -> Swift.Void)
+  @objc deinit
+}
+public struct AnyEncodable : Swift.Encodable {
+  public let value: Any
+  public init<T>(_ value: T?)
+}
+extension AnyEncodable : Swift.Equatable {
+  public static func == (lhs: TealiumCore.AnyEncodable, rhs: TealiumCore.AnyEncodable) -> Swift.Bool
+}
+extension AnyEncodable : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension AnyEncodable : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AnyEncodable : Swift.ExpressibleByNilLiteral {
+}
+extension AnyEncodable : Swift.ExpressibleByBooleanLiteral {
+  public typealias BooleanLiteralType = Swift.Bool
+}
+extension AnyEncodable : Swift.ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension AnyEncodable : Swift.ExpressibleByFloatLiteral {
+  public typealias FloatLiteralType = Swift.Double
+}
+extension AnyEncodable : Swift.ExpressibleByArrayLiteral {
+  public typealias ArrayLiteralElement = Any
+}
+extension AnyEncodable : Swift.ExpressibleByDictionaryLiteral {
+  public typealias Key = Swift.AnyHashable
+  public typealias Value = Any
+}
+public protocol DispatchListener {
+  func willTrack(request: TealiumCore.TealiumRequest)
+}
+public protocol ConnectivityDelegate : AnyObject {
+  func connectionLost()
+  func connectionRestored()
+}
+public struct AnyCodable : Swift.Codable {
+  public let value: Any
+  public init<T>(_ value: T?)
+}
+extension AnyCodable : Swift.Equatable {
+  public static func == (lhs: TealiumCore.AnyCodable, rhs: TealiumCore.AnyCodable) -> Swift.Bool
+}
+extension AnyCodable : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension AnyCodable : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension AnyCodable : Swift.ExpressibleByNilLiteral {
+}
+extension AnyCodable : Swift.ExpressibleByBooleanLiteral {
+  public typealias BooleanLiteralType = Swift.Bool
+}
+extension AnyCodable : Swift.ExpressibleByIntegerLiteral {
+  public typealias IntegerLiteralType = Swift.Int
+}
+extension AnyCodable : Swift.ExpressibleByFloatLiteral {
+  public typealias FloatLiteralType = Swift.Double
+}
+extension AnyCodable : Swift.ExpressibleByArrayLiteral {
+  public typealias ArrayLiteralElement = Any
+}
+extension AnyCodable : Swift.ExpressibleByDictionaryLiteral {
+  public typealias Key = Swift.AnyHashable
+  public typealias Value = Any
+}
+extension TealiumConfig {
+  public func setMinimumFreeDiskSpace(spaceInMB: Swift.Int32)
+  public func getMinimumFreeDiskSpace() -> Swift.Int32?
+  public var minimumFreeDiskSpace: Swift.Int32? {
+    get
+    set
+  }
+  public var diskStorageEnabled: Swift.Bool {
+    get
+    set
+  }
+  public var diskStorageDirectory: TealiumCore.Disk.Directory? {
+    get
+    set
+  }
+}
+extension Tealium {
+  public var logger: TealiumCore.TealiumLoggerProtocol? {
+    get
+  }
+}
+extension TealiumConfig {
+  public var loggerType: TealiumCore.TealiumLoggerType {
+    get
+    set
+  }
+  public var logLevel: TealiumCore.TealiumLogLevel? {
+    get
+    set
+  }
+}
+extension TealiumCore.LifecycleType : Swift.Equatable {}
+extension TealiumCore.LifecycleType : Swift.Hashable {}
+extension TealiumCore.HostedDataLayer : TealiumCore.DispatchValidator {}
+extension TealiumCore.TealiumLogCategory : Swift.Equatable {}
+extension TealiumCore.TealiumLogCategory : Swift.Hashable {}
+extension TealiumCore.DeviceData.Unit : Swift.Equatable {}
+extension TealiumCore.DeviceData.Unit : Swift.Hashable {}
+extension TealiumCore.DeviceData.Unit : Swift.RawRepresentable {}
+extension TealiumCore.TealiumLogLevel : Swift.Hashable {}
+extension TealiumCore.TealiumLogLevel : Swift.RawRepresentable {}
+extension TealiumCore.TealiumConsentCategories : Swift.Equatable {}
+extension TealiumCore.TealiumConsentCategories : Swift.Hashable {}
+extension TealiumCore.TealiumConsentCategories : Swift.RawRepresentable {}
+extension TealiumCore.TealiumConsentPolicy : Swift.Equatable {}
+extension TealiumCore.TealiumConsentPolicy : Swift.Hashable {}
+extension TealiumCore.TealiumConsentPolicy : Swift.RawRepresentable {}
+extension TealiumCore.TealiumConsentStatus : Swift.Equatable {}
+extension TealiumCore.TealiumConsentStatus : Swift.Hashable {}
+extension TealiumCore.TealiumConsentStatus : Swift.RawRepresentable {}
+extension TealiumCore.TealiumConsentTrackAction : Swift.Hashable {}
+extension TealiumCore.NetworkError : Swift.Equatable {}
+extension TealiumCore.NetworkError : Swift.Hashable {}
+extension TealiumCore.NetworkError : Swift.RawRepresentable {}
+extension TealiumCore.RefreshTime : Swift.Equatable {}
+extension TealiumCore.RefreshTime : Swift.Hashable {}
+extension TealiumCore.TealiumTrackType : Swift.Equatable {}
+extension TealiumCore.TealiumTrackType : Swift.Hashable {}
+extension TealiumCore.HttpStatusCodes : Swift.Equatable {}
+extension TealiumCore.HttpStatusCodes : Swift.Hashable {}
+extension TealiumCore.HttpStatusCodes : Swift.RawRepresentable {}
+extension TealiumCore.TimeUnit : Swift.Equatable {}
+extension TealiumCore.TimeUnit : Swift.Hashable {}
+extension TealiumCore.SessionError : Swift.Equatable {}
+extension TealiumCore.SessionError : Swift.Hashable {}
