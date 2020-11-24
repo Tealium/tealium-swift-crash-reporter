@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/tealium/tealium-swift", from: "2.1.0"),
-        .package(url: "https://github.com/christinasund/plcrash-test", .branch("update-5"))
+        .package(url: "https://github.com/christinasund/plcrash-test", from: "1.6.7")
     ],
     targets: [
         .target(
