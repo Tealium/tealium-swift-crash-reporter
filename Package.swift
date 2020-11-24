@@ -11,12 +11,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/tealium/tealium-swift", from: "2.1.0"),
-        .package(url: "https://github.com/christinasund/plcrash-test", .branch("update-3"))
+        .package(url: "https://github.com/christinasund/plcrash-test", .branch("update-5"))
     ],
     targets: [
         .target(
             name: "TealiumCrashModule",
-            dependencies: ["TealiumCrashReporter", "TealiumCore"],
+            dependencies: ["CrashReporter", "TealiumCore"],
             path: "./TealiumCrashModule/TealiumCrashModule"),
         .testTarget(
             name: "TealiumCrashModuleTests",
