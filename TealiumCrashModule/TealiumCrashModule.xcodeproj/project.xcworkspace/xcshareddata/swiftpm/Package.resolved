@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "TealiumCrashReporter",
-        "repositoryURL": "https://github.com/christinasund/plcrash-test",
+        "repositoryURL": "https://github.com/tealium/plcrashreporter",
         "state": {
           "branch": null,
-          "revision": "82104fd8627b478b27904174faffc187cf77c7da",
-          "version": "1.6.7"
+          "revision": "9baed18af574a7da553e353dbfd08c2e3b85ca15",
+          "version": "1.5.0"
         }
       },
       {
