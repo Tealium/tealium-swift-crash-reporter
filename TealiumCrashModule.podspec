@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.name         = "TealiumCrashModule"
     s.module_name  = "TealiumCrashModule"
-    s.version      = "2.1.0"
+    s.version      = "2.2.0"
     s.summary      = "Crash module for Tealium Swift v2.0.0+"
     s.description  = <<-DESC
     Crash module for Tealium Swift v2.0.0+
@@ -24,16 +24,17 @@ Pod::Spec.new do |s|
     s.ios.deployment_target = "10.0"    
 
     # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash-reporter", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/Tealium/tealium-swift-crash-reporter.git", :tag => "#{s.version}" }
 
     s.default_subspec = "Crash"
+    s.static_framework = true
 
     s.subspec "Crash" do |crash|
         # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
         crash.ios.source_files      = "TealiumCrashModule/TealiumCrashModule/*.{swift}"
         # ――― Dependencies ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
         crash.ios.dependency 'tealium-swift/Core'
-        crash.ios.dependency "TealiumCrashReporter"
+        crash.ios.dependency 'TealiumCrashReporter'
     end
 
 end

@@ -1,17 +1,13 @@
 //
 //  TealiumCrashTests.swift
-//  tealium-swift-tests-ios
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/12/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
-//@testable import TealiumAppData
 import TealiumCore
 @testable import TealiumCrashModule
-@testable import TealiumCrashReporteriOS
-//@testable import DeviceData
-//@testable import TealiumVolatileData
+@testable import CrashReporter
 import XCTest
 
 class TealiumCrashTests: XCTestCase {
@@ -53,14 +49,14 @@ class TealiumCrashTests: XCTestCase {
         let crashReport = TEALPLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
-        XCTAssertEqual(DeviceDataValue.unknown, crash.memoryUsage)
+        XCTAssertEqual(TealiumValue.unknown, crash.memoryUsage)
     }
 
     func testMemoryAvailableReturnsUnknownIfMemoryFreeIsNil() {
         let crashReport = TEALPLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection)
 
-        XCTAssertEqual(DeviceDataValue.unknown, crash.deviceMemoryAvailable)
+        XCTAssertEqual(TealiumValue.unknown, crash.deviceMemoryAvailable)
     }
 
     func testThreadsReturnsCrashedIfTruncated() {

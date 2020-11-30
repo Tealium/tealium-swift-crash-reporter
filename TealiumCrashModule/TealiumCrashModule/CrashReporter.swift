@@ -1,8 +1,7 @@
 //
 //  CrashReporter.swift
-//  TealiumCrash
+//  TealiumCrashModule
 //
-//  Created by Jonathan Wong on 2/15/18.
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
@@ -12,7 +11,7 @@ import TealiumSwift
 #else
 import TealiumCore
 #endif
-import TealiumCrashReporteriOS
+import CrashReporter
 
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
 public protocol CrashReporterProtocol: class {

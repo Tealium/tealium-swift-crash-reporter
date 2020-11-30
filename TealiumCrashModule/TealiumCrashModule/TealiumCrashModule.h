@@ -2,7 +2,6 @@
 //  TealiumCrashModule.h
 //  TealiumCrashModule
 //
-//  Created by Craig Rouse on 27/05/2020.
 //  Copyright © 2020 Tealium. All rights reserved.
 //
 
