@@ -139,7 +139,7 @@ class TealiumCrashTests: XCTestCase {
                 XCTAssertEqual(1, mockDiskStorage.crashCount)
                 
                 _ = crash.getData()
-                XCTAssertEqual(1, mockDiskStorage.crashCount)
+                XCTAssertEqual(2, mockDiskStorage.crashCount)
                 
             } catch _ {
                 XCTFail("Error running test")
