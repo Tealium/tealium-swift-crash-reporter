@@ -36,10 +36,12 @@ public class TealiumPLCrash: AppDataCollection {
     var signalAddress: String?
     var threadInfos: [TEALPLCrashReportThreadInfo]?
     var images: [TEALPLCrashReportBinaryImageInfo]?
+    var diskStorage: TealiumDiskStorageProtocol
 
-    init(crashReport: TEALPLCrashReport, deviceDataCollection: DeviceDataCollection) {
+    init(crashReport: TEALPLCrashReport, deviceDataCollection: DeviceDataCollection, diskStorage: TealiumDiskStorageProtocol) {
         self.crashReport = crashReport
         self.deviceDataCollection = deviceDataCollection
+        self.diskStorage = diskStorage
         self.uuid = UUID().uuidString
 
         if crashReport.hasProcessInfo {
@@ -74,6 +76,15 @@ public class TealiumPLCrash: AppDataCollection {
 
         if let threads = crashReport.threads, !crashReport.threads.isEmpty {
             self.threadInfos = threads as? [TEALPLCrashReportThreadInfo]
+        }
+    }
+    
+    var crashCount: Int {
+        get {
+            diskStorage.getFromDefaults(key: CrashKey.count) as? Int ?? 0
+        }
+        set {
+            diskStorage.saveToDefaults(key: CrashKey.count, value: newValue)
         }
     }
 
@@ -214,7 +225,8 @@ public class TealiumPLCrash: AppDataCollection {
     ///
     /// - Returns: [String: Any] containing all crash-related variables
     public func getData(truncateLibraries: Bool = false, truncateThreads: Bool = false) -> [String: Any] {
-        [TealiumKey.event: TealiumPLCrash.CrashEvent,
+        crashCount += 1
+        return [TealiumKey.event: TealiumPLCrash.CrashEvent,
          CrashKey.uuid: uuid,
          CrashKey.deviceMemoryUsageLegacy: memoryUsage,
          CrashKey.deviceMemoryUsage: memoryUsage,
@@ -232,7 +244,8 @@ public class TealiumPLCrash: AppDataCollection {
          CrashKey.signalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
          CrashKey.signalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
          CrashKey.libraries: libraries(truncate: truncateLibraries),
-         CrashKey.threads: threads(truncate: truncateThreads)
+         CrashKey.threads: threads(truncate: truncateThreads),
+         CrashKey.count: crashCount
         ]
     }
 

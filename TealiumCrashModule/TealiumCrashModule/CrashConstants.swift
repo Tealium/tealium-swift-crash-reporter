@@ -10,6 +10,7 @@ import Foundation
 public enum CrashKey {
     public static let moduleName = "crash"
     public static let uuid = "crash_uuid"
+    public static let count = "crash_count"
     public static let processId = "crash_process_id"
     public static let processPath = "crash_process_path"
     public static let parentProcess = "crash_parent_process"

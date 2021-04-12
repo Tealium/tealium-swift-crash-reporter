@@ -31,8 +31,10 @@ public class CrashReporter: CrashReporterProtocol {
 
     var crashReporter = TEALPLCrashReporter()
     public var crashData: [String: Any]?
+    var diskStorage: TealiumDiskStorageProtocol
 
-    public init() {
+    public init(diskStorage: TealiumDiskStorageProtocol) {
+        self.diskStorage = diskStorage
         self.enable()
     }
 
@@ -75,10 +77,9 @@ public class CrashReporter: CrashReporterProtocol {
         guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
             return nil
         }
-        let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData())
+        let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData(), diskStorage: diskStorage)
         var data = [String: Any]()
         data += crash.getData(truncate: true)
-
         return data
     }
 }
