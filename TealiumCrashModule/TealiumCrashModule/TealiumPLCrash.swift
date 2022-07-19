@@ -93,7 +93,7 @@ public class TealiumPLCrash: AppDataCollection {
             deviceMemoryUsage = deviceDataCollection.memoryUsage
         }
 
-        guard let appMemoryUsage = deviceMemoryUsage?[DeviceDataKey.appMemoryUsage] else {
+        guard let appMemoryUsage = deviceMemoryUsage?[TealiumDataKey.appMemoryUsage] else {
             return TealiumValue.unknown
         }
         return appMemoryUsage
@@ -103,7 +103,7 @@ public class TealiumPLCrash: AppDataCollection {
         if deviceMemoryUsage == nil {
             deviceMemoryUsage = deviceDataCollection.memoryUsage
         }
-        guard let memoryAvailable = deviceMemoryUsage?[DeviceDataKey.memoryFree] else {
+        guard let memoryAvailable = deviceMemoryUsage?[TealiumDataKey.memoryFree] else {
             return TealiumValue.unknown
         }
         return memoryAvailable
@@ -226,26 +226,26 @@ public class TealiumPLCrash: AppDataCollection {
     /// - Returns: [String: Any] containing all crash-related variables
     public func getData(truncateLibraries: Bool = false, truncateThreads: Bool = false) -> [String: Any] {
         crashCount += 1
-        return [TealiumKey.event: TealiumPLCrash.CrashEvent,
-         CrashKey.uuid: uuid,
-         CrashKey.deviceMemoryUsageLegacy: memoryUsage,
-         CrashKey.deviceMemoryUsage: memoryUsage,
-         CrashKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
-         CrashKey.deviceMemoryAvailable: deviceMemoryAvailable,
-         CrashKey.deviceOsBuild: osBuild,
-         TealiumKey.appBuild: appBuild(),
-         CrashKey.processId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.processPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.parentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.parentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.exceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.exceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.libraries: libraries(truncate: truncateLibraries),
-         CrashKey.threads: threads(truncate: truncateThreads),
-         CrashKey.count: crashCount
+        return [TealiumDataKey.event: TealiumPLCrash.CrashEvent,
+                CrashKey.uuid: uuid,
+                CrashKey.deviceMemoryUsageLegacy: memoryUsage,
+                CrashKey.deviceMemoryUsage: memoryUsage,
+                CrashKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
+                CrashKey.deviceMemoryAvailable: deviceMemoryAvailable,
+                CrashKey.deviceOsBuild: osBuild,
+                TealiumDataKey.appBuild: appBuild(),
+                CrashKey.processId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.processPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.parentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.parentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.exceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.exceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.signalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.signalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.signalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
+                CrashKey.libraries: libraries(truncate: truncateLibraries),
+                CrashKey.threads: threads(truncate: truncateThreads),
+                CrashKey.count: crashCount
         ]
     }
 

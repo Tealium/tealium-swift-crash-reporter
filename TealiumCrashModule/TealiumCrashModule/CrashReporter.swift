@@ -14,7 +14,7 @@ import TealiumCore
 import CrashReporter
 
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
-public protocol CrashReporterProtocol: class {
+public protocol CrashReporterProtocol: AnyObject {
     @discardableResult
     func enable() -> Bool
 

@@ -5,7 +5,7 @@
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
-import TealiumCore
+@testable import TealiumCore
 @testable import TealiumCrashModule
 @testable import CrashReporter
 import XCTest
@@ -97,12 +97,12 @@ class TealiumCrashTests: XCTestCase {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
                 let crashReport = try TEALPLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
-                let expectedKeys = [TealiumKey.event,
+                let expectedKeys = [TealiumDataKey.event,
                                     CrashKey.uuid,
                                     CrashKey.deviceMemoryUsage,
                                     CrashKey.deviceMemoryAvailable,
                                     CrashKey.deviceOsBuild,
-                                    TealiumKey.appBuild,
+                                    TealiumDataKey.appBuild,
                                     CrashKey.processId,
                                     CrashKey.processPath,
                                     CrashKey.parentProcess,

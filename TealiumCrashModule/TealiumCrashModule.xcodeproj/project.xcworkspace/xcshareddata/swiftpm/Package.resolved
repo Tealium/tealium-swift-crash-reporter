@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "TealiumCrashReporter",
-        "repositoryURL": "https://github.com/tealium/plcrashreporter",
-        "state": {
-          "branch": null,
-          "revision": "9baed18af574a7da553e353dbfd08c2e3b85ca15",
-          "version": "1.5.0"
-        }
-      },
-      {
-        "package": "TealiumSwift",
-        "repositoryURL": "https://github.com/tealium/tealium-swift",
-        "state": {
-          "branch": null,
-          "revision": "4c807fa348bd18844a4dd12ced16a4480e41b8a1",
-          "version": "2.1.1"
-        }
+  "pins" : [
+    {
+      "identity" : "plcrashreporter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tealium/plcrashreporter",
+      "state" : {
+        "revision" : "9baed18af574a7da553e353dbfd08c2e3b85ca15",
+        "version" : "1.5.0"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "tealium-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tealium/tealium-swift",
+      "state" : {
+        "revision" : "3ed9f6593aeaf7c47f15e3f50d998a39c91ab065",
+        "version" : "2.6.5"
+      }
+    }
+  ],
+  "version" : 2
 }
