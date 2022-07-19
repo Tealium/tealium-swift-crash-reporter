@@ -32,14 +32,14 @@ class TealiumCrashTests: XCTestCase {
     }
 
     func testCrashUuidNotNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
 
         XCTAssertNotNil(crash.uuid, "crash.uuid should not be nil")
     }
 
     func testCrashUuidsUnique() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash1 = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
         let crash2 = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
 
@@ -47,14 +47,14 @@ class TealiumCrashTests: XCTestCase {
     }
 
     func testMemoryUsageReturnsUnknownIfAppMemoryUsageIsNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
 
         XCTAssertEqual(TealiumValue.unknown, crash.memoryUsage)
     }
 
     func testMemoryAvailableReturnsUnknownIfMemoryFreeIsNil() {
-        let crashReport = TEALPLCrashReport()
+        let crashReport = PLCrashReport()
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
 
         XCTAssertEqual(TealiumValue.unknown, crash.deviceMemoryAvailable)
@@ -65,7 +65,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "index_out_of_bounds", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
                 let result = crash.threads(truncate: true)
                 XCTAssertEqual(1, result.count)
@@ -80,7 +80,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "index_out_of_bounds", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
                 let result = crash.libraries(truncate: true)
                 XCTAssertEqual(1, result.count)
@@ -95,7 +95,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "live_report", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
                 let expectedKeys = [TealiumDataKey.event,
                                     CrashKey.uuid,
@@ -132,7 +132,7 @@ class TealiumCrashTests: XCTestCase {
         if let url = testBundle.url(forResource: "live_report", withExtension: "plcrash") {
             do {
                 let data = try Data(contentsOf: url, options: Data.ReadingOptions.mappedRead)
-                let crashReport = try TEALPLCrashReport(data: data)
+                let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
 
                 _ = crash.getData()
