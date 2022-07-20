@@ -98,23 +98,23 @@ class TealiumCrashTests: XCTestCase {
                 let crashReport = try PLCrashReport(data: data)
                 let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: mockDeviceDataCollection, diskStorage: mockDiskStorage)
                 let expectedKeys = [TealiumDataKey.event,
-                                    CrashKey.uuid,
-                                    CrashKey.deviceMemoryUsage,
-                                    CrashKey.deviceMemoryAvailable,
-                                    CrashKey.deviceOsBuild,
+                                    TealiumDataKey.crashUuid,
+                                    TealiumDataKey.deviceMemoryUsage,
+                                    TealiumDataKey.deviceMemoryAvailable,
+                                    TealiumDataKey.deviceOsBuild,
                                     TealiumDataKey.appBuild,
-                                    CrashKey.processId,
-                                    CrashKey.processPath,
-                                    CrashKey.parentProcess,
-                                    CrashKey.parentProcessId,
-                                    CrashKey.exceptionName,
-                                    CrashKey.exceptionReason,
-                                    CrashKey.signalCode,
-                                    CrashKey.signalName,
-                                    CrashKey.signalAddress,
-                                    CrashKey.libraries,
-                                    CrashKey.threads,
-                                    CrashKey.count
+                                    TealiumDataKey.crashProcessId,
+                                    TealiumDataKey.crashProcessPath,
+                                    TealiumDataKey.crashParentProcess,
+                                    TealiumDataKey.crashParentProcessId,
+                                    TealiumDataKey.crashExceptionName,
+                                    TealiumDataKey.crashExceptionReason,
+                                    TealiumDataKey.crashSignalCode,
+                                    TealiumDataKey.crashSignalName,
+                                    TealiumDataKey.crashSignalAddress,
+                                    TealiumDataKey.crashLibraries,
+                                    TealiumDataKey.crashThreads,
+                                    TealiumDataKey.crashCount
                 ]
                 let result = crash.getData()
                 for key in expectedKeys {

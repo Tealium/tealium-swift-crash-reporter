@@ -227,25 +227,25 @@ public class TealiumPLCrash: AppDataCollection {
     public func getData(truncateLibraries: Bool = false, truncateThreads: Bool = false) -> [String: Any] {
         crashCount += 1
         return [TealiumDataKey.event: TealiumPLCrash.CrashEvent,
-                CrashKey.uuid: uuid,
-                CrashKey.deviceMemoryUsageLegacy: memoryUsage,
-                CrashKey.deviceMemoryUsage: memoryUsage,
-                CrashKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
-                CrashKey.deviceMemoryAvailable: deviceMemoryAvailable,
-                CrashKey.deviceOsBuild: osBuild,
+                TealiumDataKey.crashUuid: uuid,
+                TealiumDataKey.deviceMemoryUsageLegacy: memoryUsage,
+                TealiumDataKey.deviceMemoryUsage: memoryUsage,
+                TealiumDataKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
+                TealiumDataKey.deviceMemoryAvailable: deviceMemoryAvailable,
+                TealiumDataKey.deviceOsBuild: osBuild,
                 TealiumDataKey.appBuild: appBuild(),
-                CrashKey.processId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.processPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.parentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.parentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.exceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.exceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.signalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.signalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.signalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
-                CrashKey.libraries: libraries(truncate: truncateLibraries),
-                CrashKey.threads: threads(truncate: truncateThreads),
-                CrashKey.count: crashCount
+                TealiumDataKey.crashProcessId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashProcessPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashParentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashParentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashExceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashExceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashLibraries: libraries(truncate: truncateLibraries),
+                TealiumDataKey.crashThreads: threads(truncate: truncateThreads),
+                TealiumDataKey.crashCount: crashCount
         ]
     }
 
