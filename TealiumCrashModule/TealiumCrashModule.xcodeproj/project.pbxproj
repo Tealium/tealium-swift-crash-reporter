@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15632CFF2886A43F0012950D /* TealiumCore in Frameworks */ = {isa = PBXBuildFile; productRef = 15632CFE2886A43F0012950D /* TealiumCore */; };
 		15632D052886BF300012950D /* TealiumCore in Frameworks */ = {isa = PBXBuildFile; productRef = 15632D042886BF300012950D /* TealiumCore */; };
+		1598D29F28881DE70037FFE8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1598D29E28881DE70037FFE8 /* Info.plist */; };
 		CF696BBD256EBBFA002E3573 /* CrashReporter in Frameworks */ = {isa = PBXBuildFile; productRef = CF696BBC256EBBFA002E3573 /* CrashReporter */; };
 		D7B3AC47247EC2280040A0DE /* TealiumCrashModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D7B3AC54247EC8340040A0DE /* CrashModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B3AC50247EC8340040A0DE /* CrashModule.swift */; };
@@ -48,9 +49,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1598D29E28881DE70037FFE8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Support/Info.plist; sourceTree = "<group>"; };
 		D7B3AC42247EC2280040A0DE /* TealiumCrashModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TealiumCrashModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TealiumCrashModule.h; sourceTree = "<group>"; };
-		D7B3AC46247EC2280040A0DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7B3AC50247EC8340040A0DE /* CrashModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashModule.swift; sourceTree = "<group>"; };
 		D7B3AC51247EC8340040A0DE /* CrashReporter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashReporter.swift; sourceTree = "<group>"; };
 		D7B3AC52247EC8340040A0DE /* TealiumPLCrash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TealiumPLCrash.swift; sourceTree = "<group>"; };
@@ -122,7 +123,7 @@
 				D7B3AC51247EC8340040A0DE /* CrashReporter.swift */,
 				D7B3AC52247EC8340040A0DE /* TealiumPLCrash.swift */,
 				D7B3AC45247EC2280040A0DE /* TealiumCrashModule.h */,
-				D7B3AC46247EC2280040A0DE /* Info.plist */,
+				1598D29E28881DE70037FFE8 /* Info.plist */,
 			);
 			path = TealiumCrashModule;
 			sourceTree = "<group>";
@@ -261,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1598D29F28881DE70037FFE8 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
