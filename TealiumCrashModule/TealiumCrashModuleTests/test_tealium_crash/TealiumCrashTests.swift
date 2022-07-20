@@ -5,7 +5,7 @@
 //  Copyright © 2018 Tealium, Inc. All rights reserved.
 //
 
-@testable import TealiumCore
+import TealiumCore
 @testable import TealiumCrashModule
 @testable import CrashReporter
 import XCTest
