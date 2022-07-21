@@ -121,3 +121,7 @@ xcuserdata
 
 # End of https://www.gitignore.io/api/xcode,swift,carthage,cocoapods,swiftpackagemanager
 
+
+*/TealiumCrashModule.xcframework/
+TealiumCrashModule.xcframework/
+TealiumCrashModule.xcframework.zip
