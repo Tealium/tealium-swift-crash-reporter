@@ -18,10 +18,9 @@ struct ContentView: View {
                 Text("Track")
             }.padding()
             Button {
-                CrashReporter.invokeCrash(name: "asd", reason: "asd")
-//                NSException.raise(NSExceptionName("Exception"),
-//                                  format: "This is a test exception",
-//                                  arguments: getVaList(["nil"]))
+                NSException.raise(NSExceptionName("Exception"),
+                                  format: "This is a test exception",
+                                  arguments: getVaList(["nil"]))
             } label: {
                 Text("CRASH!!!")
             }.padding()
