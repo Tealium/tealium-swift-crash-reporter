@@ -14,7 +14,7 @@ import TealiumCore
 import CrashReporter
 
 /// Defines the specifications for CrashReporterProtocol.  Concrete CrashReporters must implement this protocol.
-public protocol CrashReporterProtocol: class {
+public protocol CrashReporterProtocol: AnyObject {
     @discardableResult
     func enable() -> Bool
 
@@ -29,7 +29,7 @@ public protocol CrashReporterProtocol: class {
 
 public class CrashReporter: CrashReporterProtocol {
 
-    var crashReporter = TEALPLCrashReporter()
+    var crashReporter = PLCrashReporter()
     public var crashData: [String: Any]?
     var diskStorage: TealiumDiskStorageProtocol
 
@@ -74,7 +74,7 @@ public class CrashReporter: CrashReporterProtocol {
             return crashData
         }
         let crashReportData = crashReporter.loadPendingCrashReportData()
-        guard let crashReport = try? TEALPLCrashReport(data: crashReportData) else {
+        guard let crashReport = try? PLCrashReport(data: crashReportData) else {
             return nil
         }
         let crash = TealiumPLCrash(crashReport: crashReport, deviceDataCollection: DeviceData(), diskStorage: diskStorage)

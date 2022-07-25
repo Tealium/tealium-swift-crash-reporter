@@ -132,4 +132,9 @@ class MockDataLayer: DataLayerManagerProtocol {
     
     func deleteAll() { }
     
+    func add(data: [String : Any], expiry: Expiry) {
+    }
+    
+    func add(key: String, value: Any, expiry: Expiry) {
+    }
 }

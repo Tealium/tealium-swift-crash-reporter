@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "TealiumCrashReporter",
-        "repositoryURL": "https://github.com/tealium/plcrashreporter",
+        "package": "PLCrashReporter",
+        "repositoryURL": "https://github.com/microsoft/plcrashreporter",
         "state": {
           "branch": null,
-          "revision": "9baed18af574a7da553e353dbfd08c2e3b85ca15",
-          "version": "1.5.0"
+          "revision": "81cdec2b3827feb03286cb297f4c501a8eb98df1",
+          "version": "1.10.2"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/tealium/tealium-swift",
         "state": {
           "branch": null,
-          "revision": "4c807fa348bd18844a4dd12ced16a4480e41b8a1",
-          "version": "2.1.1"
+          "revision": "3ed9f6593aeaf7c47f15e3f50d998a39c91ab065",
+          "version": "2.6.5"
         }
       }
     ]

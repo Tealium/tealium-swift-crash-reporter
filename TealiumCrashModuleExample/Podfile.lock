@@ -1,0 +1,32 @@
+PODS:
+  - PLCrashReporter (1.10.2)
+  - tealium-swift/Collect (2.6.5):
+    - tealium-swift/Core
+  - tealium-swift/Core (2.6.5)
+  - TealiumCrashModule (2.3.0):
+    - TealiumCrashModule/Crash (= 2.3.0)
+  - TealiumCrashModule/Crash (2.3.0):
+    - PLCrashReporter
+    - tealium-swift/Core
+
+DEPENDENCIES:
+  - tealium-swift/Collect
+  - TealiumCrashModule (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - PLCrashReporter
+    - tealium-swift
+
+EXTERNAL SOURCES:
+  TealiumCrashModule:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PLCrashReporter: 2a08001f8e6a30abe405ee8f13d2753cfb5d682a
+  tealium-swift: 1e06aa9071e84086360d407dc4687906dd759542
+  TealiumCrashModule: d4deeb190ff64aa8ebd8122120727979d5d7b041
+
+PODFILE CHECKSUM: 9677f0be465fbfc0040a8f71cfc75d2897b7ee13
+
+COCOAPODS: 1.11.2

@@ -19,7 +19,7 @@ public class TealiumPLCrash: AppDataCollection {
     static let CrashDataUnknown = "unknown"
     static let CrashEvent = "crash"
 
-    let crashReport: TEALPLCrashReport
+    let crashReport: PLCrashReport
     let deviceDataCollection: DeviceDataCollection
     private let bundle = Bundle.main
 
@@ -34,11 +34,11 @@ public class TealiumPLCrash: AppDataCollection {
     var signalCode: String?
     var signalName: String?
     var signalAddress: String?
-    var threadInfos: [TEALPLCrashReportThreadInfo]?
-    var images: [TEALPLCrashReportBinaryImageInfo]?
+    var threadInfos: [PLCrashReportThreadInfo]?
+    var images: [PLCrashReportBinaryImageInfo]?
     var diskStorage: TealiumDiskStorageProtocol
 
-    init(crashReport: TEALPLCrashReport, deviceDataCollection: DeviceDataCollection, diskStorage: TealiumDiskStorageProtocol) {
+    init(crashReport: PLCrashReport, deviceDataCollection: DeviceDataCollection, diskStorage: TealiumDiskStorageProtocol) {
         self.crashReport = crashReport
         self.deviceDataCollection = deviceDataCollection
         self.diskStorage = diskStorage
@@ -70,12 +70,12 @@ public class TealiumPLCrash: AppDataCollection {
             self.signalAddress = String(signalInfo.address)
         }
 
-        if let images = crashReport.images, crashReport.images as? [TEALPLCrashReportBinaryImageInfo] != nil {
-            self.images = images as? [TEALPLCrashReportBinaryImageInfo]
+        if let images = crashReport.images, crashReport.images as? [PLCrashReportBinaryImageInfo] != nil {
+            self.images = images as? [PLCrashReportBinaryImageInfo]
         }
 
         if let threads = crashReport.threads, !crashReport.threads.isEmpty {
-            self.threadInfos = threads as? [TEALPLCrashReportThreadInfo]
+            self.threadInfos = threads as? [PLCrashReportThreadInfo]
         }
     }
     
@@ -93,7 +93,7 @@ public class TealiumPLCrash: AppDataCollection {
             deviceMemoryUsage = deviceDataCollection.memoryUsage
         }
 
-        guard let appMemoryUsage = deviceMemoryUsage?[DeviceDataKey.appMemoryUsage] else {
+        guard let appMemoryUsage = deviceMemoryUsage?[TealiumDataKey.appMemoryUsage] else {
             return TealiumValue.unknown
         }
         return appMemoryUsage
@@ -103,7 +103,7 @@ public class TealiumPLCrash: AppDataCollection {
         if deviceMemoryUsage == nil {
             deviceMemoryUsage = deviceDataCollection.memoryUsage
         }
-        guard let memoryAvailable = deviceMemoryUsage?[DeviceDataKey.memoryFree] else {
+        guard let memoryAvailable = deviceMemoryUsage?[TealiumDataKey.memoryFree] else {
             return TealiumValue.unknown
         }
         return memoryAvailable
@@ -151,7 +151,7 @@ public class TealiumPLCrash: AppDataCollection {
         for thread in threadInfos {
             var registerDictionary = [String: Any]()
             if let registers = thread.registers, !thread.registers.isEmpty {
-                for case let register as TEALPLCrashReportRegisterInfo in registers {
+                for case let register as PLCrashReportRegisterInfo in registers {
                     registerDictionary[register.registerName] = String(format: "0x%02x", register.registerValue)
                 }
             }
@@ -163,7 +163,7 @@ public class TealiumPLCrash: AppDataCollection {
             var stackArray = [[String: Any]]()
             var stackDictionary = [String: Any]()
             if let stackFrames = thread.stackFrames, !thread.stackFrames.isEmpty {
-                for case let stack as TEALPLCrashReportStackFrameInfo in stackFrames {
+                for case let stack as PLCrashReportStackFrameInfo in stackFrames {
                     stackDictionary[CrashKey.ImageThread.instructionPointer] = stack.instructionPointer
                     var symbolDictionary = [String: Any]()
                     if let symbolInfo = stack.symbolInfo {
@@ -226,26 +226,26 @@ public class TealiumPLCrash: AppDataCollection {
     /// - Returns: [String: Any] containing all crash-related variables
     public func getData(truncateLibraries: Bool = false, truncateThreads: Bool = false) -> [String: Any] {
         crashCount += 1
-        return [TealiumKey.event: TealiumPLCrash.CrashEvent,
-         CrashKey.uuid: uuid,
-         CrashKey.deviceMemoryUsageLegacy: memoryUsage,
-         CrashKey.deviceMemoryUsage: memoryUsage,
-         CrashKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
-         CrashKey.deviceMemoryAvailable: deviceMemoryAvailable,
-         CrashKey.deviceOsBuild: osBuild,
-         TealiumKey.appBuild: appBuild(),
-         CrashKey.processId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.processPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.parentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.parentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.exceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.exceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.signalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
-         CrashKey.libraries: libraries(truncate: truncateLibraries),
-         CrashKey.threads: threads(truncate: truncateThreads),
-         CrashKey.count: crashCount
+        return [TealiumDataKey.event: TealiumPLCrash.CrashEvent,
+                TealiumDataKey.crashUuid: uuid,
+                TealiumDataKey.deviceMemoryUsageLegacy: memoryUsage,
+                TealiumDataKey.deviceMemoryUsage: memoryUsage,
+                TealiumDataKey.deviceMemoryAvailableLegacy: deviceMemoryAvailable,
+                TealiumDataKey.deviceMemoryAvailable: deviceMemoryAvailable,
+                TealiumDataKey.deviceOsBuild: osBuild,
+                TealiumDataKey.appBuild: appBuild(),
+                TealiumDataKey.crashProcessId: processIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashProcessPath: processPath ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashParentProcess: parentProcessName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashParentProcessId: parentProcessIdentifier ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashExceptionName: exceptionName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashExceptionReason: exceptionReason ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalCode: signalCode ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalName: signalName ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashSignalAddress: signalAddress ?? TealiumPLCrash.CrashDataUnknown,
+                TealiumDataKey.crashLibraries: libraries(truncate: truncateLibraries),
+                TealiumDataKey.crashThreads: threads(truncate: truncateThreads),
+                TealiumDataKey.crashCount: crashCount
         ]
     }
 
