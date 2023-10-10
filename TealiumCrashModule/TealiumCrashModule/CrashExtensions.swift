@@ -37,3 +37,22 @@ public extension TealiumDataKey {
     static let crashThreads = "crash_threads"
     static let crashCount = "crash_count"
 }
+
+public extension TealiumConfig {
+    var sendCrashDataOnCrashDetected: Bool {
+        get {
+            options[TealiumConfigKey.sendCrashDataOnCrashDetected] as? Bool ?? false
+        }
+        set {
+            options[TealiumConfigKey.sendCrashDataOnCrashDetected] = newValue
+        }
+    }
+}
+
+extension TealiumConfigKey {
+    static let sendCrashDataOnCrashDetected = "send_crash_data_on_detected_event"
+}
+
+extension TealiumKey {
+    static let crashEvent = "crash"
+}
