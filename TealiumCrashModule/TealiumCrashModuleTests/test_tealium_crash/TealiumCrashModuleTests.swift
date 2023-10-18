@@ -61,10 +61,10 @@ class CrashModuleTests: XCTestCase {
     }
 
     func testCrashEventIsRequested() {
-        let crasheEventTracked = expectation(description: "Crash event is tracked")
+        let crashEventTracked = expectation(description: "Crash event is tracked")
         onRequestTrack = { trackRequest in
             if trackRequest.event == TealiumKey.crashEvent {
-                crasheEventTracked.fulfill()
+                crashEventTracked.fulfill()
             }
         }
         mockCrashReporter.pendingCrashReport = true
