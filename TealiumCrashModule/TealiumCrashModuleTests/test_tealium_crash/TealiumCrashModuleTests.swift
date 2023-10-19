@@ -14,14 +14,18 @@ class CrashModuleTests: XCTestCase {
     var crashModule: CrashModule!
     var context: TealiumContext!
     var mockCrashReporter: MockTealiumCrashReporter!
+    var onRequestTrack: ((TealiumTrackRequest) -> Void)?
     
     override func setUp() {
         super.setUp()
         let config = TealiumConfig(account: "TestAccount", profile: "TestProfile", environment: "TestEnvironment")
         let tealium = Tealium(config: config)
         context = TealiumContext(config: config, dataLayer: MockDataLayer(), tealium: tealium)
-        crashModule = CrashModule(context: context, delegate: self, diskStorage: nil, completion: { _ in })
         mockCrashReporter = MockTealiumCrashReporter()
+        crashModule = CrashModule(context: context,
+                                  delegate: self,
+                                  diskStorage: nil,
+                                  crashReporter: mockCrashReporter)
     }
 
     override func tearDown() {
@@ -30,23 +34,43 @@ class CrashModuleTests: XCTestCase {
         super.tearDown()
     }
 
-    func testDataFinishesWithNoResponseIfNotEnabled() {
-        crashModule.crashReporter = mockCrashReporter
-        _ = crashModule.data
-        XCTAssertEqual(0, mockCrashReporter.hasPendingCrashReportCalledCount)
-    }
-
     func testDataFinishesWithNoResponseWhenNoPendingCrashReport() {
-        crashModule.crashReporter = mockCrashReporter
-        _ = crashModule.data
-        XCTAssertEqual(0, mockCrashReporter.loadPendingCrashReportDataCalledCount)
+        XCTAssertEqual(0, mockCrashReporter.getDataCallCount)
+        XCTAssertEqual(0, mockCrashReporter.purgePendingCrashReportCallCount)
     }
 
-    func testDataCallsGetDataMethod() {
-        crashModule.crashReporter = mockCrashReporter
+    func testPendingCrashCausesAGetDataMethod() {
         mockCrashReporter.pendingCrashReport = true
-        _ = crashModule.data
+        let _ = CrashModule(context: context, delegate: self, diskStorage: nil, crashReporter: mockCrashReporter)
         XCTAssertEqual(1, mockCrashReporter.getDataCallCount)
+    }
+
+    func testPendingCrashCausesAPurgePendingCrashes() {
+        mockCrashReporter.pendingCrashReport = true
+        let _ = CrashModule(context: context, delegate: self, diskStorage: nil, crashReporter: mockCrashReporter)
+        XCTAssertEqual(1, mockCrashReporter.purgePendingCrashReportCallCount)
+    }
+
+    func testDataDoesntChangeAfterInitialGet() {
+        mockCrashReporter.pendingCrashReport = true
+        mockCrashReporter._data[TealiumDataKey.crashCount] = 1
+        let crashModule = CrashModule(context: context, delegate: self, diskStorage: nil, crashReporter: mockCrashReporter)
+        XCTAssertEqual(crashModule.data?[TealiumDataKey.crashCount] as? Int, 1)
+        mockCrashReporter._data[TealiumDataKey.crashCount] = 2
+        XCTAssertEqual(crashModule.data?[TealiumDataKey.crashCount] as? Int, 1)
+    }
+
+    func testCrashEventIsRequested() {
+        let crashEventTracked = expectation(description: "Crash event is tracked")
+        onRequestTrack = { trackRequest in
+            if trackRequest.event == TealiumKey.crashEvent {
+                crashEventTracked.fulfill()
+            }
+        }
+        mockCrashReporter.pendingCrashReport = true
+        context.config.sendCrashDataOnCrashDetected = true
+        let _ = CrashModule(context: context, delegate: self, diskStorage: nil, crashReporter: mockCrashReporter)
+        waitForExpectations(timeout: 1.0)
     }
 }
 
@@ -56,7 +80,7 @@ extension CrashModuleTests: ModuleDelegate {
     }
 
     func requestTrack(_ track: TealiumTrackRequest) {
-
+        onRequestTrack?(track)
     }
 
     func requestDequeue(reason: String) {
@@ -104,10 +128,10 @@ class MockTealiumCrashReporter: CrashReporterProtocol {
         purgePendingCrashReportCallCount += 1
         pendingCrashReport = false
     }
-
+    var _data: [String: Any] = ["a": "1"]
     var data: [String: Any]? {
         getDataCallCount += 1
-        return ["a": "1"]
+        return _data
     }
 }
 

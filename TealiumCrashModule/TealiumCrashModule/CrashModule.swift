@@ -20,9 +20,7 @@ public class CrashModule: Collector {
     var diskStorage: TealiumDiskStorageProtocol!
     public var config: TealiumConfig
 
-    public var data: [String: Any]? {
-        self.crashReporter?.data
-    }
+    public var data: [String: Any]? = [:]
 
     /// Provided for unit testing￼.
     ///
@@ -31,12 +29,22 @@ public class CrashModule: Collector {
     ///   - delegate: `TealiumModuleDelegate` instance
     ///   - diskStorage: `TealiumDiskStorageProtocol` instance
     ///   - crashReporter: Class instance conforming to `CrashReporterProtocol`
-    convenience init(context: TealiumContext,
-                     delegate: ModuleDelegate?,
-                     diskStorage: TealiumDiskStorageProtocol?,
-                      crashReporter: CrashReporterProtocol) {
-        self.init(context: context, delegate: delegate, diskStorage: diskStorage) { _ in }
+    init(context: TealiumContext,
+         delegate: ModuleDelegate?,
+         diskStorage: TealiumDiskStorageProtocol?,
+         crashReporter: CrashReporterProtocol) {
+        self.delegate = delegate
+        self.config = context.config
         self.crashReporter = crashReporter
+        if self.crashReporter?.hasPendingCrashReport() == true {
+            if context.config.sendCrashDataOnCrashDetected {
+                delegate?.requestTrack(TealiumEvent(TealiumKey.crashEvent,
+                                                    dataLayer: crashReporter.data).trackRequest)
+            } else {
+                self.data = crashReporter.data
+            }
+            self.crashReporter?.purgePendingCrashReport()
+        }
     }
 
     /// Initializes the module
@@ -46,14 +54,15 @@ public class CrashModule: Collector {
     ///   - delegate: `TealiumModuleDelegate` instance
     ///   - diskStorage: `TealiumDiskStorageProtocol` instance
     ///   - completion: `ModuleCompletion` block to be called when init is finished
-    required public init(context: TealiumContext,
+    required convenience public init(context: TealiumContext,
                          delegate: ModuleDelegate?,
                          diskStorage: TealiumDiskStorageProtocol?,
                          completion: ((Result<Bool, Error>, [String : Any]?)) -> Void) {
-        self.delegate = delegate
-        self.config = context.config
-        self.diskStorage = diskStorage ?? TealiumDiskStorage(config: config, forModule: "crash", isCritical: true)
-        self.crashReporter = CrashReporter(diskStorage: self.diskStorage)
+        let diskStorage = diskStorage ?? TealiumDiskStorage(config: context.config, forModule: "crash", isCritical: true)
+        self.init(context: context,
+                  delegate: delegate,
+                  diskStorage: diskStorage,
+                  crashReporter: CrashReporter(diskStorage: diskStorage))
         completion((.success(true), nil))
     }
 

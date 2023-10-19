@@ -32,6 +32,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         config.collectors = [Collectors.AppData,
                              Collectors.Crash,] // Instantiates the CrashReporter module
         config.dispatchers = [Dispatchers.Collect]
+        config.sendCrashDataOnCrashDetected = true
         tealium = Tealium(config: config) { _ in }
         return true
     }

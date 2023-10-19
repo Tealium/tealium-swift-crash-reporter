@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
     s.name         = "TealiumCrashModule"
     s.module_name  = "TealiumCrashModule"
-    s.version      = "2.3.0"
+    s.version      = "2.4.0"
     s.summary      = "Crash module for Tealium Swift v2.0.0+"
     s.description  = <<-DESC
     Adds crashing data reporting to the Tealium Swift SDK.
