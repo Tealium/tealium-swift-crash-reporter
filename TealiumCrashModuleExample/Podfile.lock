@@ -1,13 +1,13 @@
 PODS:
-  - PLCrashReporter (1.10.2)
-  - tealium-swift/Collect (2.6.5):
+  - PLCrashReporter (1.11.1)
+  - tealium-swift/Collect (2.12.2):
     - tealium-swift/Core
-  - tealium-swift/Core (2.6.5)
-  - TealiumCrashModule (2.3.0):
-    - TealiumCrashModule/Crash (= 2.3.0)
-  - TealiumCrashModule/Crash (2.3.0):
-    - PLCrashReporter
-    - tealium-swift/Core
+  - tealium-swift/Core (2.12.2)
+  - TealiumCrashModule (2.5.0):
+    - TealiumCrashModule/Crash (= 2.5.0)
+  - TealiumCrashModule/Crash (2.5.0):
+    - PLCrashReporter (~> 1.11)
+    - tealium-swift/Core (~> 2.12)
 
 DEPENDENCIES:
   - tealium-swift/Collect
@@ -23,10 +23,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PLCrashReporter: 2a08001f8e6a30abe405ee8f13d2753cfb5d682a
-  tealium-swift: 1e06aa9071e84086360d407dc4687906dd759542
-  TealiumCrashModule: 49826bdeb10b24407296463cd30a9ee00ca43232
+  PLCrashReporter: 5d2d3967afe0efad61b3048d617e2199a5d1b787
+  tealium-swift: 4b7e3dda42d7c1de6acb769abad9920346d17d43
+  TealiumCrashModule: f52a33391a599e6b62983caff5432cd7e536104d
 
-PODFILE CHECKSUM: 9677f0be465fbfc0040a8f71cfc75d2897b7ee13
+PODFILE CHECKSUM: f42513f0e4fa4fb776ae8518b481802963601346
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2

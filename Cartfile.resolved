@@ -1,2 +1,2 @@
-github "microsoft/plcrashreporter" "1.10.2"
-github "tealium/tealium-swift" "2.6.5"
+github "microsoft/plcrashreporter" "1.11.1"
+github "tealium/tealium-swift" "2.12.2"

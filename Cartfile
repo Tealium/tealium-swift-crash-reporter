@@ -1,2 +1,2 @@
-github "https://github.com/tealium/tealium-swift" ~> 2.6
-github "https://github.com/microsoft/plcrashreporter" ~> 1.10
+github "https://github.com/tealium/tealium-swift" ~> 2.12
+github "https://github.com/microsoft/plcrashreporter" ~> 1.11
